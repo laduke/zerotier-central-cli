@@ -63,7 +63,6 @@ ListNetworks.description = 'list your networks'
 
 ListNetworks.flags = {
   ...Command.flags,
-  json: flags.boolean({char: 'j', description: 'output raw json'}),
   extended: flags.boolean({description: 'extended output'}),
 }
 

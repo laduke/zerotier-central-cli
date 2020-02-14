@@ -30,6 +30,7 @@ Base.flags = {
     char: 't',
     description: 'my.zerotier.com api access token',
   }),
+  json: flags.boolean({char: 'j', description: 'output raw json'}),
 }
 
 module.exports = Base
