@@ -28,26 +28,10 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`ztc hello`](#ztc-hello)
 * [`ztc help [COMMAND]`](#ztc-help-command)
-
-## `ztc hello`
-
-Describe the command here
-
-```
-USAGE
-  $ ztc hello
-
-OPTIONS
-  -n, --name=name  name to print
-
-DESCRIPTION
-  ...
-  Extra documentation goes here
-```
-
-_See code: [src/commands/hello.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.0/src/commands/hello.js)_
+* [`ztc list-networks`](#ztc-list-networks)
+* [`ztc setup`](#ztc-setup)
+* [`ztc status`](#ztc-status)
 
 ## `ztc help [COMMAND]`
 
@@ -65,4 +49,51 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
+
+## `ztc list-networks`
+
+list your networks
+
+```
+USAGE
+  $ ztc list-networks
+
+OPTIONS
+  -j, --json         output raw json
+  -t, --token=token  my.zerotier.com api access token
+```
+
+_See code: [src/commands/list-networks.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.0/src/commands/list-networks.js)_
+
+## `ztc setup`
+
+Save your api token to disk.
+
+```
+USAGE
+  $ ztc setup
+
+OPTIONS
+  -t, --token=token  my.zerotier.com api access token
+```
+
+_See code: [src/commands/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.0/src/commands/setup.js)_
+
+## `ztc status`
+
+Describe the command here
+
+```
+USAGE
+  $ ztc status
+
+OPTIONS
+  -n, --name=name  name to print
+
+DESCRIPTION
+  ...
+  Extra documentation goes here
+```
+
+_See code: [src/commands/status.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.0/src/commands/status.js)_
 <!-- commandsstop -->

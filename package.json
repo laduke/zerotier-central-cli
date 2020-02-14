@@ -8,9 +8,12 @@
   },
   "bugs": "https://github.com/laduke/zerotier-central-cli/issues",
   "dependencies": {
+    "@laduke/zerotier-central-client": "0.0.3",
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.14.0",
-    "@oclif/plugin-help": "^2.2.3"
+    "@oclif/plugin-help": "^2.2.3",
+    "cli-ux": "^5.4.4",
+    "conf": "^6.2.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
@@ -19,7 +22,7 @@
     "globby": "^10.0.2"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=8.3.0"
   },
   "files": [
     "/bin",
