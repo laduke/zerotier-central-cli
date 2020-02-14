@@ -11,6 +11,7 @@
     "@laduke/zerotier-central-client": "0.0.3",
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.14.0",
+    "@oclif/plugin-autocomplete": "^0.1.5",
     "@oclif/plugin-help": "^2.2.3",
     "cli-ux": "^5.4.4",
     "conf": "^6.2.0"
@@ -40,7 +41,8 @@
     "commands": "./src/commands",
     "bin": "ztc",
     "plugins": [
-      "@oclif/plugin-help"
+      "@oclif/plugin-help",
+      "@oclif/plugin-autocomplete"
     ]
   },
   "repository": "laduke/zerotier-central-cli",

@@ -12,6 +12,4 @@ npm i -g @laduke/zerotier-central cli
 
 `ztc help`
 
-there's help so 
-
-
+there's help so
