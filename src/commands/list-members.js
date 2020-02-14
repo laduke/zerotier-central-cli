@@ -18,7 +18,7 @@ class ListMembers extends Command {
   }
 }
 
-ListMembers.description = 'list your networks'
+ListMembers.description = 'list members of network'
 ListMembers.args = [{name: 'networkId', required: true}]
 
 ListMembers.flags = {

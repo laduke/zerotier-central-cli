@@ -16,6 +16,6 @@ class SetupCommand extends Command {
   }
 }
 
-SetupCommand.description = 'Save your api token to disk.'
+SetupCommand.description = 'save your api token to disk.'
 
 module.exports = SetupCommand
