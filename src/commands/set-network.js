@@ -1,48 +1,140 @@
 const {flags} = require('@oclif/command')
 const Command = require('../base.js')
-const makeTable = require('../member-table.js')
+const makeTable = require('../network-table.js')
 
 class SetNetwork extends Command {
   async run() {
     const {flags} = this.parse(SetNetwork)
     const {
-      args: {networkId, nodeId},
+      args: {networkId},
     } = this.parse(SetNetwork)
 
-    const {hidden, name, description} = flags
-    const {authorized, activeBridge, noAutoAssignIps} = flags
+    const newFlat = strip(fromFlags(flags))
 
-    const data = {
-      hidden, name, description,
-      config: {authorized, activeBridge, noAutoAssignIps},
-    }
+    const oldNetwork = await this.central.getNetwork(networkId)
+    const oldFlat = rwNetworkProps(oldNetwork)
+    const merged = {...oldFlat, ...newFlat}
 
-    // strip keys with undefined values
-    const data2 = JSON.parse(JSON.stringify(data))
+    // console.log('old', oldFlat)
+    // console.log('new', newFlat)
+    // console.log('merged', merged)
+    console.log(unFlat(merged))
 
-    const member = await this.central.setMember(networkId, nodeId, data2)
+    const network = await this.central.setNetwork(networkId, unFlat(merged))
 
     if (flags.json) {
-      this.log(JSON.stringify(member, 0, 4))
+      this.log(JSON.stringify(network, 0, 4))
     } else {
-      this.log(makeTable([member], flags))
+      this.log(makeTable([network], flags))
     }
+  }
+}
+function strip(obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
+
+function unFlat(props) {
+  const {
+    enableBroadcast,
+    multicastLimit,
+    description,
+    sixPlane,
+    rfc4193,
+    private: priv,
+    name,
+    mtu,
+    zt4,
+    zt6,
+  } = props
+
+  return {
+    description,
+    config: {
+      name,
+      enableBroadcast,
+      private: priv,
+      multicastLimit: Number(multicastLimit),
+      mtu: Number(mtu),
+      v4AssignMode: {zt: zt4},
+      v6AssignMode: {zt: zt6, '6plane': sixPlane, rfc4193},
+    },
+  }
+}
+
+function fromFlags(flags) {
+  const {
+    description,
+    name,
+    enableBroadcast,
+    private: priv,
+    multicastLimit,
+    mtu,
+    v4AutoAssign: zt4,
+    v6AutoAssign: zt6,
+    '6plane': sixPlane,
+    rfc4193,
+  } = flags
+
+  return {
+    enableBroadcast,
+    multicastLimit,
+    description,
+    sixPlane,
+    rfc4193,
+    private: priv,
+    name,
+    mtu,
+    zt4,
+    zt6,
+  }
+}
+
+function rwNetworkProps(network) {
+  const {
+    description,
+    config: {
+      name,
+      enableBroadcast,
+      private: priv,
+      multicastLimit,
+      mtu,
+      v4AssignMode: {zt: zt4},
+      v6AssignMode: {zt: zt6, '6plane': sixPlane, rfc4193},
+    },
+  } = network
+
+  return {
+    description,
+    enableBroadcast,
+    mtu,
+    multicastLimit,
+    name,
+    private: priv,
+    rfc4193,
+    sixPlane,
+    zt4,
+    zt6,
   }
 }
 
 SetNetwork.description = 'change config'
-SetNetwork.args = [
-  {name: 'networkId', required: true},
-]
+SetNetwork.args = [{name: 'networkId', required: true}]
 
 SetNetwork.flags = {
   ...Command.flags,
-  authorized: flags.boolean({allowNo: true}),
-  hidden: flags.boolean({allowNo: true}),
   name: flags.string({allowNo: false}),
   description: flags.string({allowNo: false}),
-  activeBridge: flags.boolean({allowNo: true}),
-  noAutoAssignIps: flags.boolean({allowNo: true}),
+
+  enableBroadcast: flags.boolean({allowNo: true}),
+  private: flags.boolean({allowNo: true}),
+
+  multicastLimit: flags.string({allowNo: false}),
+  mtu: flags.string({allowNo: false}),
+
+  v4AutoAssign: flags.boolean({allowNo: true}),
+  v6AutoAssign: flags.boolean({allowNo: true}),
+  '6plane': flags.boolean({allowNo: true}),
+  rfc4193: flags.boolean({allowNo: true}),
 }
 
 module.exports = SetNetwork

@@ -20,7 +20,8 @@
     "@oclif/dev-cli": "^1.22.2",
     "eslint": "^5.16.0",
     "eslint-config-oclif": "^3.1.0",
-    "globby": "^10.0.2"
+    "globby": "^10.0.2",
+    "tape": "^5.0.0-next.4"
   },
   "engines": {
     "node": ">=8.3.0"
