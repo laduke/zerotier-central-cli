@@ -9,7 +9,7 @@ var {
 } = require('./network-object.js')
 var sample = require('./network-sample.js')
 
-test('Or type thing', t => {
+test.only('Or type thing', t => {
   const zt1 = Or.of(undefined)
   const zt2 = Or.of(true)
   const zt3 = Or.of(false)
@@ -98,22 +98,27 @@ test('network', t => {
     }),
   })
 
-  const b = Network.of({
-    description: Or.of('lolita'),
-    config: Config.of({
-      v4AssignMode: V4AssignModes.of({zt: Or.of(false)}),
-      v6AssignMode: V6AssignModes.of({
-        zt: Or.of(true),
-        rfc4193: Or.of(false),
-      }),
-      name: Or.of('alice'),
-    }),
+  // const b = Network.of({
+  //   description: Or.of('lolita'),
+  //   config: Config.of({
+  //     v4AssignMode: V4AssignModes.of({zt: Or.of(false)}),
+  //     v6AssignMode: V6AssignModes.of({
+  //       zt: Or.of(true),
+  //       rfc4193: Or.of(false),
+  //     }),
+  //     name: Or.of('alice'),
+  //   }),
+  // })
+
+  const c = Network.of({
+    description: Or.of('c network'),
   })
 
-  t.ok(a.concat(b).equal(b))
-  t.ok(b.concat(a).equal(a))
+  // t.ok(a.concat(b).equal(b))
+  // t.ok(b.concat(a).equal(a))
 
-  console.log(a.concat(b).join())
+  console.log(c.join())
+  console.log(a.concat(c))
 
   t.end()
 })

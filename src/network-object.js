@@ -1,4 +1,5 @@
 // const assert = require('assert')
+// TODO see test, we got problems with undefined nested things
 
 class Or {
   constructor(val) {
@@ -26,7 +27,7 @@ class V4AssignModes {
   constructor(props) {
     const {zt} = props
 
-    this.zt = zt
+    this.zt = zt || Or.of()
   }
 
   static of(props) {
@@ -88,9 +89,9 @@ class V6AssignModes {
 class Config {
   constructor(props) {
     const {v4AssignMode, v6AssignMode, name} = props
-    this.v4AssignMode = v4AssignMode
-    this.v6AssignMode = v6AssignMode
-    this.name = name
+    this.v4AssignMode = v4AssignMode || Or.of({})
+    this.v6AssignMode = v6AssignMode || Or.of({})
+    this.name = name || Or.of()
   }
 
   static of(props) {
@@ -112,18 +113,18 @@ class Config {
   }
 
   join() {
-    return {
+    return strip({
       v4AssignMode: this.v4AssignMode.join(),
       v6AssignMode: this.v6AssignMode.join(),
       name: this.name.join(),
-    }
+    })
   }
 }
 
 class Network {
   constructor(props) {
-    this.config = props.config
-    this.description = props.description
+    this.config = props.config || Or.of()
+    this.description = props.description || Or.of()
   }
 
   static of(props) {
@@ -141,7 +142,7 @@ class Network {
   }
 
   join() {
-    return {config: this.config.join(), description: this.description.join()}
+    return strip({config: this.config.join(), description: this.description.join()})
   }
 }
 
