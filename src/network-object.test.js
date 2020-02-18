@@ -1,124 +1,67 @@
 var test = require('tape')
 
-var {
-  Network,
-  Config,
-  V6AssignModes,
-  V4AssignModes,
-  Or,
-} = require('./network-object.js')
+var {Or, Network, Route, Routes} = require('./network-object.js')
 var sample = require('./network-sample.js')
 
-test.only('Or type thing', t => {
+// zt4, zt6, rfc4193, 6plane, description, rulesSource
+// capabilities[], tags[], enableBroadcast, ipAssignmentPools[], routes[], rules[]
+// mtu, multicastLimit, name, private
+
+test('Any type thing', t => {
   const zt1 = Or.of(undefined)
   const zt2 = Or.of(true)
   const zt3 = Or.of(false)
 
-  t.ok(zt2.concat(zt1).equal(zt2))
-  t.ok(zt3.concat(zt1).equal(zt3))
+  t.ok(zt1.concat(zt1).equal(zt1))
   t.ok(zt1.concat(zt2).equal(zt2))
   t.ok(zt1.concat(zt3).equal(zt3))
 
+  t.ok(zt2.concat(zt1).equal(zt2))
+  t.ok(zt2.concat(zt2).equal(zt2))
   t.ok(zt2.concat(zt3).equal(zt3))
+
+  t.ok(zt3.concat(zt1).equal(zt3))
   t.ok(zt3.concat(zt2).equal(zt2))
-
-  t.ok(zt1.concat(zt1).equal(zt1))
-
-  t.end()
-})
-
-test('v4assignmode', t => {
-  t.ok(1)
-
-  const a = V4AssignModes.of({zt: Or.of(true)})
-  const b = V4AssignModes.of({zt: Or.of(undefined)})
-
-  t.ok(a.concat(b).equal(a))
-  t.ok(b.concat(a).equal(a))
+  t.ok(zt3.concat(zt3).equal(zt3))
 
   t.end()
 })
 
-test('v6assignmode', t => {
-  t.ok(1)
+// zt4, zt6, rfc4193, 6plane, description, rulesSource
+// capabilities[], tags[], enableBroadcast, ipAssignmentPools[], routes[], rules[]
+// mtu, multicastLimit, name, private
 
-  const a = V6AssignModes.of({zt: Or.of(true)})
-  const b = V6AssignModes.of({zt: Or.of(undefined)})
-  const c = V6AssignModes.of({'6plane': Or.of(true)})
-  const d = V6AssignModes.of({rfc4193: Or.of(false)})
+function strip(obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
 
-  t.ok(a.concat(b).equal(a))
-  t.ok(b.concat(a).equal(a))
-  t.ok(b.concat(c).equal(c))
-  t.ok(b.concat(d).equal(d))
+test.only('routes', t => {
+  const route1 = Route.of('192.168.168.192/24')
+  const route2 = Route.of('192.168.168.193/24')
+  const route3 = Route.of('172.25.0.0/24')
+  const route4 = Route.of('172.25.0.0/10', '1.1.1.1')
+  const route5 = Route.of('172.25.0.0/8')
+  const route6 = Route.of('172.25.0.0/31')
 
-  t.ok(
-    a
-    .concat(b)
-    .concat(c)
-    .concat(d)
-    .equal(a.concat(b.concat(c.concat(d))))
+  const network = Network.fromAPI(sample)
+  // const routes = network.routes.map(Route.fromAPI)
+  const routes = [route1, route2, route3, route4, route5, route6]
+  // console.log(routes.filter(r => r.equals(route1)))
+  // console.log(
+  //   routes
+  //   .filter(r => !r.equals(route3))
+  //   .concat(route1)
+  //   .concat(route2)
+  //   .concat(route3)
+  // )
+  // console.log(routes.concat(Route.of({target: '192.168.168.192'})))
+
+  console.log(
+    routes.sort((a, b) => (a.lte(b) ? -1 : 1))
   )
 
-  t.end()
-})
-
-test('config', t => {
-  t.ok(1)
-
-  const a = Config.of({
-    v4AssignMode: V4AssignModes.of({zt: Or.of(true)}),
-    v6AssignMode: V6AssignModes.of({zt: Or.of(false), rfc4193: Or.of(true)}),
-    name: Or.of('bob'),
-  })
-  const b = Config.of({
-    v4AssignMode: V4AssignModes.of({zt: Or.of(false)}),
-    v6AssignMode: V6AssignModes.of({zt: Or.of(true), rfc4193: Or.of(false)}),
-    name: Or.of('alice'),
-  })
-
-  t.ok(a.concat(b).equal(b))
-  t.ok(b.concat(a).equal(a))
-
-  t.end()
-})
-
-test('network', t => {
-  t.ok(1)
-
-  const a = Network.of({
-    description: Or.of('cov'),
-    config: Config.of({
-      v4AssignMode: V4AssignModes.of({zt: Or.of(true)}),
-      v6AssignMode: V6AssignModes.of({
-        zt: Or.of(false),
-        rfc4193: Or.of(true),
-      }),
-      name: Or.of('bob'),
-    }),
-  })
-
-  // const b = Network.of({
-  //   description: Or.of('lolita'),
-  //   config: Config.of({
-  //     v4AssignMode: V4AssignModes.of({zt: Or.of(false)}),
-  //     v6AssignMode: V6AssignModes.of({
-  //       zt: Or.of(true),
-  //       rfc4193: Or.of(false),
-  //     }),
-  //     name: Or.of('alice'),
-  //   }),
-  // })
-
-  const c = Network.of({
-    description: Or.of('c network'),
-  })
-
-  // t.ok(a.concat(b).equal(b))
-  // t.ok(b.concat(a).equal(a))
-
-  console.log(c.join())
-  console.log(a.concat(c))
+  // network routes concat(route)
+  // network routes filter(route)
 
   t.end()
 })

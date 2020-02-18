@@ -1,148 +1,34 @@
-// const assert = require('assert')
-// TODO see test, we got problems with undefined nested things
+const assert = require('assert')
+const isIp = require('is-ip')
+const isCidr = require('is-cidr')
+
+function ipCompare(a, b) {
+  return String(a).localeCompare(
+    String(b),
+    {},
+    {numeric: true, sensitivity: 'base'}
+  )
+}
 
 class Or {
-  constructor(val) {
-    this.val = val
+  constructor($value) {
+    this.$value = $value
   }
 
-  static of(val) {
-    return new Or(val)
-  }
-
-  concat(that) {
-    return new Or(that.val != null ? that.val : this.val)
-  }
-
-  equal(that) {
-    return this.val === that.val
-  }
-
-  join() {
-    return this.val
-  }
-}
-
-class V4AssignModes {
-  constructor(props) {
-    const {zt} = props
-
-    this.zt = zt || Or.of()
-  }
-
-  static of(props) {
-    return new V4AssignModes(props)
+  static of($value) {
+    return new Or($value)
   }
 
   concat(that) {
-    const zt = this.zt.concat(that.zt)
-    return new V4AssignModes({zt})
+    return new Or(that.$value !== undefined ? that.$value : this.$value)
   }
 
   equal(that) {
-    return this.zt.val === that.zt.val
+    return this.$value === that.$value
   }
 
   join() {
-    return strip({zt: this.zt.join()})
-  }
-}
-
-class V6AssignModes {
-  constructor(props) {
-    const {'6plane': s, rfc4193, zt} = props
-
-    this['6plane'] = s || Or.of(undefined)
-    this.rfc4193 = rfc4193 || Or.of(undefined)
-    this.zt = zt || Or.of(undefined)
-  }
-
-  static of(props) {
-    return new V6AssignModes(props)
-  }
-
-  concat(that) {
-    const zt = this.zt.concat(that.zt)
-    const six = this['6plane'].concat(that['6plane'])
-    const rfc4193 = this.rfc4193.concat(that.rfc4193)
-
-    return new V6AssignModes({zt, '6plane': six, rfc4193})
-  }
-
-  equal(that) {
-    return (
-      this.zt.equal(that.zt) &&
-      this['6plane'].equal(that['6plane']) &&
-      this.rfc4193.equal(that.rfc4193)
-    )
-  }
-
-  join() {
-    return strip({
-      zt: this.zt.join(),
-      '6plane': this['6plane'].join(),
-      rfc4193: this.rfc4193.join(),
-    })
-  }
-}
-
-class Config {
-  constructor(props) {
-    const {v4AssignMode, v6AssignMode, name} = props
-    this.v4AssignMode = v4AssignMode || Or.of({})
-    this.v6AssignMode = v6AssignMode || Or.of({})
-    this.name = name || Or.of()
-  }
-
-  static of(props) {
-    return new Config(props)
-  }
-
-  concat(that) {
-    const v4AssignMode = this.v4AssignMode.concat(that.v4AssignMode)
-    const v6AssignMode = this.v6AssignMode.concat(that.v6AssignMode)
-    const name = this.name.concat(that.name)
-    return new Config({v4AssignMode, v6AssignMode, name})
-  }
-
-  equal(that) {
-    return (
-      this.v6AssignMode.equal(that.v6AssignMode) &&
-      this.v4AssignMode.equal(that.v4AssignMode)
-    )
-  }
-
-  join() {
-    return strip({
-      v4AssignMode: this.v4AssignMode.join(),
-      v6AssignMode: this.v6AssignMode.join(),
-      name: this.name.join(),
-    })
-  }
-}
-
-class Network {
-  constructor(props) {
-    this.config = props.config || Or.of()
-    this.description = props.description || Or.of()
-  }
-
-  static of(props) {
-    return new Network(props)
-  }
-
-  concat(that) {
-    const config = this.config.concat(that.config)
-    const description = this.description.concat(that.description)
-    return new Network({config, description})
-  }
-
-  equal(that) {
-    return this.config.equal(that.config)
-  }
-
-  join() {
-    return strip({config: this.config.join(), description: this.description.join()})
+    return this.value ? this.$value : this
   }
 }
 
@@ -151,4 +37,176 @@ function strip(obj) {
   return JSON.parse(JSON.stringify(obj))
 }
 
-module.exports = {Network, V6AssignModes, V4AssignModes, Or, Config}
+class Network {
+  constructor(opts) {
+    Object.keys(opts).forEach(p => (this[p] = opts[p]))
+  }
+
+  static of(opts) {
+    return new Network(opts)
+  }
+
+  static fromAPI(opts) {
+    const {
+      id,
+      description,
+      rulesSource,
+      config: {
+        name,
+        mtu,
+        v4AssignMode: {zt: zt4} = {},
+        v6AssignMode: {zt: zt6, '6plane': plane6, rfc4193} = {},
+        enableBroadcast,
+        multicastLimit,
+        routes = [],
+        ipAssignmentPools = [],
+      } = {},
+    } = opts
+
+    return new Network({
+      ipAssignmentPools,
+      enableBroadcast,
+      multicastLimit,
+      description,
+      rulesSource,
+      rfc4193,
+      plane6,
+      routes,
+      name,
+      mtu,
+      zt4,
+      zt6,
+      id,
+    })
+  }
+
+  concat(that) {
+    Object.keys(this).reduce((acc, el) => {})
+  }
+
+  toAPI() {
+    const {
+      ipAssignmentPools,
+      enableBroadcast,
+      multicastLimit,
+      description,
+      rulesSource,
+      rfc4193,
+      plane6,
+      routes,
+      name,
+      zt4,
+      zt6,
+      id,
+    } = this
+
+    return {
+      id,
+      description,
+      rulesSource,
+      config: {
+        v6AssignMode: {zt: zt6, '6plane': plane6, rfc4193},
+        v4AssignMode: {zt: zt4},
+        ipAssignmentPools,
+        enableBroadcast,
+        multicastLimit,
+        routes,
+        name,
+      },
+    }
+  }
+}
+
+class Routes {
+  constructor(rs) {
+    this.$routes = rs
+  }
+
+  static of(routes) {
+    return new Routes(routes)
+  }
+
+  filter(fn) {
+    return this.$routes.filter(fn)
+  }
+
+  concat(route) {
+    return this.$routes.filter(r => !r.equals(route)).concat(route)
+  }
+}
+
+class Route {
+  constructor(target, via) {
+    assert(
+      isCidr(target),
+      `target should be subnet in CIDR format. Got: ${target}`
+    )
+
+    assert(
+      isIp(via) || via == null,
+      `target should be an IP address or undefined. Got: ${via}`
+    )
+
+    this.$target = target
+    this.$via = via || ''
+  }
+
+  static of(target, via) {
+    return new Route(target, via)
+  }
+
+  static fromAPI({target, via}) {
+    return new Route(target, via)
+  }
+
+  equals(that) {
+    return this.$target === that.$target && this.$via === that.$via
+  }
+
+  lte(that) {
+    const s1 = toValue(this.$target.split('/')[0])
+    const s2 = toValue(that.$target.split('/')[0])
+
+    const m1 = Number(this.$target.split('/')[1])
+    const m2 = Number(that.$target.split('/')[1])
+
+    return s1 + m1 <= s2 + m2
+  }
+}
+
+function toValue(subnet) {
+  const [a, b, c, d] = subnet.split('.').map(Number)
+  return a * 256 ** 4 + b * 256 ** 3 + c * 256 ** 2 + d * 256 ** 1
+}
+
+module.exports = {Or, Network, Route, Routes}
+
+class Maybe {
+  constructor(x) {
+    this.$value = x
+  }
+
+  get isNothing() {
+    return this.$value === null || this.$value === undefined
+  }
+
+  get isJust() {
+    return !this.isNothing
+  }
+
+  join() {
+    return this.isNothing ? this : this.$value
+  }
+
+  static of(x) {
+    return new Maybe(x)
+  }
+
+  // map(fn) {
+  //   return this.isNothing ? this : Maybe.of(fn(this.$value))
+  // }
+
+  concat(that) {
+    return Maybe.of(that.isJust ? that.$value : this.$value)
+  }
+}
