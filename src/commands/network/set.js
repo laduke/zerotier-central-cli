@@ -1,6 +1,10 @@
+const assert = require('assert')
 const {flags} = require('@oclif/command')
-const Command = require('../base.js')
-const makeTable = require('../network-table.js')
+const Command = require('../../base.js')
+const isIp = require('is-ip')
+const isCidr = require('is-cidr')
+
+const makeTable = require('../../network-table.js')
 
 class SetNetwork extends Command {
   async run() {
@@ -11,14 +15,15 @@ class SetNetwork extends Command {
 
     const newFlat = strip(fromFlags(flags))
 
+    this.validate(newFlat)
+
     const oldNetwork = await this.central.getNetwork(networkId)
+
     const oldFlat = rwNetworkProps(oldNetwork)
     const merged = {...oldFlat, ...newFlat}
 
-    // console.log('old', oldFlat)
-    // console.log('new', newFlat)
-    // console.log('merged', merged)
-    console.log(unFlat(merged))
+    // console.log(JSON.stringify(flags, 0, 4))
+    // console.log(JSON.stringify(unFlat(merged), 0, 4))
 
     const network = await this.central.setNetwork(networkId, unFlat(merged))
 
@@ -28,6 +33,38 @@ class SetNetwork extends Command {
       this.log(makeTable([network], flags))
     }
   }
+
+  validate(newFlat) {
+    try {
+      if (newFlat.ipAssignmentPools) {
+        newFlat.ipAssignmentPools.forEach(({ipRangeStart, ipRangeEnd}) => {
+          assert(
+            isIp(ipRangeStart),
+            'ipRangeStart should be an IP address. Got: ' + ipRangeStart
+          )
+          assert(
+            isIp(ipRangeEnd),
+            'ipRangeEnd should be an IP address, if defined. Got: ' + ipRangeEnd
+          )
+        })
+      }
+
+      if (newFlat.routes) {
+        newFlat.routes.forEach(({target, via}) => {
+          assert(
+            isCidr(target),
+            'Target subnet should be in CIDR notation. Got: ' + target
+          )
+          assert(
+            isIp(via) || via == null,
+            'Via should be an IP Address. Got: ' + via
+          )
+        })
+      }
+    } catch (error) {
+      this.error(error.message)
+    }
+  }
 }
 function strip(obj) {
   return JSON.parse(JSON.stringify(obj))
@@ -35,6 +72,8 @@ function strip(obj) {
 
 function unFlat(props) {
   const {
+    ipAssignmentPools,
+    routes,
     enableBroadcast,
     multicastLimit,
     description,
@@ -50,6 +89,8 @@ function unFlat(props) {
   return {
     description,
     config: {
+      routes,
+      ipAssignmentPools,
       name,
       enableBroadcast,
       private: priv,
@@ -63,6 +104,7 @@ function unFlat(props) {
 
 function fromFlags(flags) {
   const {
+    routes,
     description,
     name,
     enableBroadcast,
@@ -73,9 +115,11 @@ function fromFlags(flags) {
     v6AutoAssign: zt6,
     '6plane': sixPlane,
     rfc4193,
+    ipAssignmentPools,
   } = flags
 
   return {
+    routes,
     enableBroadcast,
     multicastLimit,
     description,
@@ -86,6 +130,7 @@ function fromFlags(flags) {
     mtu,
     zt4,
     zt6,
+    ipAssignmentPools,
   }
 }
 
@@ -93,6 +138,7 @@ function rwNetworkProps(network) {
   const {
     description,
     config: {
+      routes,
       name,
       enableBroadcast,
       private: priv,
@@ -100,6 +146,7 @@ function rwNetworkProps(network) {
       mtu,
       v4AssignMode: {zt: zt4},
       v6AssignMode: {zt: zt6, '6plane': sixPlane, rfc4193},
+      ipAssignmentPools,
     },
   } = network
 
@@ -114,6 +161,8 @@ function rwNetworkProps(network) {
     sixPlane,
     zt4,
     zt6,
+    ipAssignmentPools,
+    routes,
   }
 }
 
@@ -135,6 +184,28 @@ SetNetwork.flags = {
   v6AutoAssign: flags.boolean({allowNo: true}),
   '6plane': flags.boolean({allowNo: true}),
   rfc4193: flags.boolean({allowNo: true}),
+
+  ipAssignmentPools: flags.string({
+    description: '<rangeStart>-<rangeEnd> overwrites existing',
+    multiple: true,
+    parse: input => {
+      return [input.split('-')].reduce((acc, a) => {
+        return {...acc, ipRangeStart: a[0], ipRangeEnd: a[1]}
+      }, {})
+    },
+    allowNo: false,
+  }),
+  routes: flags.string({
+    description: '<target>[-via] overwrites existing',
+    multiple: true,
+    parse: input => {
+      return [input.split('-')].reduce(
+        (acc, a) => ({...acc, target: a[0], via: a[1]}),
+        {}
+      )
+    },
+    allowNo: true,
+  }),
 }
 
 module.exports = SetNetwork

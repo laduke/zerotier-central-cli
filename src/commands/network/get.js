@@ -1,5 +1,5 @@
-const Command = require('../base.js')
-const makeTable = require('../network-table.js')
+const Command = require('../../base.js')
+const makeTable = require('../../network-table.js')
 
 class GetNetwork extends Command {
   async run() {

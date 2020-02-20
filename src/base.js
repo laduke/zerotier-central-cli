@@ -30,7 +30,25 @@ Base.flags = {
     char: 't',
     description: 'my.zerotier.com api access token',
   }),
-  json: flags.boolean({char: 'j', description: 'output raw json'}),
+  json: flags.boolean({
+    char: 'j',
+    description: 'output raw json',
+    exclusive: ['csv'],
+  }),
+  extended: flags.boolean({char: 'e', description: 'extended output'}),
+  columns: flags.string({char: 'c'}),
+  'no-truncate': flags.boolean({
+    exclusive: ['csv'],
+    description: 'do not truncate output to fit screen',
+  }),
+  'no-header': flags.boolean({
+    exclusive: ['csv'],
+    description: 'hide table header from output',
+  }),
+  csv: flags.boolean({
+    exclusive: ['no-truncate'],
+    description: 'output is csv format',
+  }),
 }
 
 module.exports = Base

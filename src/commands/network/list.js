@@ -1,7 +1,7 @@
 const {flags} = require('@oclif/command')
 
-const Command = require('../base.js')
-const makeTable = require('../network-table.js')
+const Command = require('../../base.js')
+const makeTable = require('../../network-table.js')
 
 class ListNetworks extends Command {
   async run() {

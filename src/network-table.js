@@ -6,7 +6,7 @@ function makeTable(networks, flags) {
   return cli.table(
     networks,
     {
-      id: {header: 'Network ID', minWidth: 16},
+      id: {header: 'Network-ID', minWidth: 16},
       name: {
         minWidth: 10,
         get: row => row.config.name,
@@ -15,12 +15,20 @@ function makeTable(networks, flags) {
       private: {
         get: row => row.config.private,
       },
+      authorizedMemberCount: {
+        header: 'Authorized',
+        get: row => row.authorizedMemberCount,
+      },
+      onlineMemberCount: {
+        header: 'Online',
+        get: row => row.onlineMemberCount,
+      },
       v4AutoAssign: {
-        header: 'Auto-Assign V4',
+        header: 'ZT4',
         get: row => row.config.v4AssignMode.zt,
       },
       v6AutoAssign: {
-        header: 'Auto-Assign V6',
+        header: 'ZT6',
         get: row => row.config.v6AssignMode.zt,
       },
       sixPlane: {
@@ -35,10 +43,32 @@ function makeTable(networks, flags) {
         get: row => row.config.multicastLimit,
       },
       MTU: {
+        extended: true,
+        header: 'MTU',
         get: row => row.config.mtu,
       },
       broadcast: {
         get: row => row.config.enableBroadcast,
+      },
+      ipAssignmentPools: {
+        minWidth: 16,
+        header: 'Pools',
+        get: row => {
+          return (row.config.ipAssignmentPools || [])
+          .map(p => `${p.ipRangeStart} - ${p.ipRangeEnd}`)
+          .join('\n')
+        },
+        extended: true,
+      },
+      routes: {
+        extended: true,
+        minWidth: 15,
+        header: 'Routes',
+        get: row => {
+          return (row.config.routes || [])
+          .map(p => `${p.target} ${p.via ? '- ' + p.via : ''}`)
+          .join('\n')
+        },
       },
     },
     flags
