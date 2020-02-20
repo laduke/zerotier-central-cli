@@ -1,13 +1,13 @@
 const {Command, flags} = require('@oclif/command')
 
 const _central = require('@laduke/zerotier-central-client')
-const Conf = require('conf')
+const conf = require('./conf.js')
 
 class Base extends Command {
   async init() {
     const {flags} = this.parse(this.constructor)
     this.flags = flags
-    this.conf = new Conf()
+    this.conf = conf()
     this.token = await this.getToken(flags)
     this.central = _central({token: this.token})
   }
@@ -49,7 +49,9 @@ Base.flags = {
     exclusive: ['no-truncate'],
     description: 'output is csv format',
   }),
-  sort: flags.string({description: 'property to sort by (prepend ' - ' for descending)'}),
+  sort: flags.string({
+    description: 'property to sort by (prepend ' - ' for descending)',
+  }),
 }
 
 module.exports = Base

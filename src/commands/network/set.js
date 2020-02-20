@@ -196,7 +196,7 @@ SetNetwork.flags = {
     allowNo: false,
   }),
   routes: flags.string({
-    description: '<target>[-via] overwrites existing',
+    description: '<target>[-via] overwrites existing. Can specify multiple',
     multiple: true,
     parse: input => {
       return [input.split('-')].reduce(
