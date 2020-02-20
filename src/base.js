@@ -49,6 +49,7 @@ Base.flags = {
     exclusive: ['no-truncate'],
     description: 'output is csv format',
   }),
+  sort: flags.string({description: 'property to sort by (prepend ' - ' for descending)'}),
 }
 
 module.exports = Base
