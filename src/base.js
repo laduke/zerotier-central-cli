@@ -52,6 +52,7 @@ Base.flags = {
   sort: flags.string({
     description: 'property to sort by (prepend ' - ' for descending)',
   }),
+  filter: flags.string({description: 'filter property by partial string matching, ex: name=foo'}),
 }
 
 module.exports = Base
