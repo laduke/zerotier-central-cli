@@ -1,5 +1,5 @@
-const Command = require('../base.js')
-const makeTable = require('../member-table.js')
+const Command = require('../../base.js')
+const makeTable = require('../../member-table.js')
 
 class GetMember extends Command {
   async run() {
