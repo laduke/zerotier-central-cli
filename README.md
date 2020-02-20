@@ -23,7 +23,7 @@ $ npm install -g @laduke/zerotier-central-cli
 $ ztc COMMAND
 running command...
 $ ztc (-v|--version|version)
-@laduke/zerotier-central-cli/0.0.4 darwin-x64 node-v10.16.0
+@laduke/zerotier-central-cli/0.0.5 darwin-x64 node-v11.10.1
 $ ztc --help [COMMAND]
 USAGE
   $ ztc COMMAND
@@ -96,6 +96,7 @@ OPTIONS
   -e, --extended         extended output
   -j, --json             output raw json
   -t, --token=token      my.zerotier.com api access token
+  --apiBase=apiBase      use a different central instance my-dev.zerotier.com/api
   --csv                  output is csv format
   --filter=filter        filter property by partial string matching, ex: name=foo
   --no-header            hide table header from output
@@ -103,7 +104,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/member/get.js)_
+_See code: [src/commands/member/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.5/src/commands/member/get.js)_
 
 ## `ztc member:list NETWORKID`
 
@@ -118,6 +119,7 @@ OPTIONS
   -e, --extended         extended output
   -j, --json             output raw json
   -t, --token=token      my.zerotier.com api access token
+  --apiBase=apiBase      use a different central instance my-dev.zerotier.com/api
   --csv                  output is csv format
   --filter=filter        filter property by partial string matching, ex: name=foo
   --no-header            hide table header from output
@@ -125,7 +127,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/member/list.js)_
+_See code: [src/commands/member/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.5/src/commands/member/list.js)_
 
 ## `ztc member:set NETWORKID NODEID`
 
@@ -141,6 +143,7 @@ OPTIONS
   -j, --json                 output raw json
   -t, --token=token          my.zerotier.com api access token
   --[no-]activeBridge
+  --apiBase=apiBase          use a different central instance my-dev.zerotier.com/api
   --[no-]authorized
   --csv                      output is csv format
   --description=description
@@ -153,7 +156,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/member/set.js)_
+_See code: [src/commands/member/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.5/src/commands/member/set.js)_
 
 ## `ztc network:get NETWORKID`
 
@@ -168,6 +171,7 @@ OPTIONS
   -e, --extended         extended output
   -j, --json             output raw json
   -t, --token=token      my.zerotier.com api access token
+  --apiBase=apiBase      use a different central instance my-dev.zerotier.com/api
   --csv                  output is csv format
   --filter=filter        filter property by partial string matching, ex: name=foo
   --no-header            hide table header from output
@@ -175,7 +179,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/network/get.js)_
+_See code: [src/commands/network/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.5/src/commands/network/get.js)_
 
 ## `ztc network:list`
 
@@ -190,6 +194,7 @@ OPTIONS
   -e, --extended         extended output
   -j, --json             output raw json
   -t, --token=token      my.zerotier.com api access token
+  --apiBase=apiBase      use a different central instance my-dev.zerotier.com/api
   --csv                  output is csv format
   --filter=filter        filter property by partial string matching, ex: name=foo
   --no-header            hide table header from output
@@ -197,7 +202,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/network/list.js)_
+_See code: [src/commands/network/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.5/src/commands/network/list.js)_
 
 ## `ztc network:set NETWORKID`
 
@@ -213,6 +218,7 @@ OPTIONS
   -j, --json                             output raw json
   -t, --token=token                      my.zerotier.com api access token
   --[no-]6plane
+  --apiBase=apiBase                      use a different central instance my-dev.zerotier.com/api
   --csv                                  output is csv format
   --description=description
   --[no-]enableBroadcast
@@ -231,7 +237,7 @@ OPTIONS
   --[no-]v6AutoAssign
 ```
 
-_See code: [src/commands/network/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/network/set.js)_
+_See code: [src/commands/network/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.5/src/commands/network/set.js)_
 
 ## `ztc setup`
 
@@ -242,18 +248,11 @@ USAGE
   $ ztc setup
 
 OPTIONS
-  -c, --columns=columns
-  -e, --extended         extended output
-  -j, --json             output raw json
-  -t, --token=token      my.zerotier.com api access token
-  --csv                  output is csv format
-  --filter=filter        filter property by partial string matching, ex: name=foo
-  --no-header            hide table header from output
-  --no-truncate          do not truncate output to fit screen
-  --sort=sort
+  -t, --token=token  my.zerotier.com api access token
+  --apiBase=apiBase  use a different central instance my-dev.zerotier.com/api
 ```
 
-_See code: [src/commands/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/setup.js)_
+_See code: [src/commands/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.5/src/commands/setup.js)_
 
 ## `ztc status`
 
@@ -267,8 +266,8 @@ OPTIONS
   -c, --columns=columns
   -e, --extended         extended output
   -j, --json             output raw json
-  -n, --name=name        name to print
   -t, --token=token      my.zerotier.com api access token
+  --apiBase=apiBase      use a different central instance my-dev.zerotier.com/api
   --csv                  output is csv format
   --filter=filter        filter property by partial string matching, ex: name=foo
   --no-header            hide table header from output
@@ -279,5 +278,5 @@ DESCRIPTION
   not much here
 ```
 
-_See code: [src/commands/status.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/status.js)_
+_See code: [src/commands/status.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.5/src/commands/status.js)_
 <!-- commandsstop -->
