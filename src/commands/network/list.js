@@ -21,7 +21,6 @@ ListNetworks.description = 'list your networks'
 
 ListNetworks.flags = {
   ...Command.flags,
-  extended: flags.boolean({description: 'extended output'}),
 }
 
 module.exports = ListNetworks
