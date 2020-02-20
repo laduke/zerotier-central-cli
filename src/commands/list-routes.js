@@ -29,6 +29,7 @@ function makeTable(routes, flags) {
 
 ListRoutes.description = 'list your networks'
 ListRoutes.args = [{name: 'networkId', required: true}]
+ListRoutes.hidden = true
 
 ListRoutes.flags = {
   ...Command.flags,

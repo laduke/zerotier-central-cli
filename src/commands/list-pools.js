@@ -29,6 +29,7 @@ function makeTable(routes, flags) {
 
 ListPools.description = 'list the ip auto-assign pools on a network'
 ListPools.args = [{name: 'networkId', required: true}]
+ListPools.hidden = true
 
 ListPools.flags = {
   ...Command.flags,
