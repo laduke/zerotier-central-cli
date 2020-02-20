@@ -47,29 +47,6 @@ Base.flags = {
     hidden: false,
     description: 'use a different central instance my-dev.zerotier.com/api',
   }),
-  json: flags.boolean({
-    char: 'j',
-    description: 'output raw json',
-    exclusive: ['csv'],
-  }),
-  extended: flags.boolean({char: 'e', description: 'extended output'}),
-  columns: flags.string({char: 'c'}),
-  'no-truncate': flags.boolean({
-    exclusive: ['csv'],
-    description: 'do not truncate output to fit screen',
-  }),
-  'no-header': flags.boolean({
-    exclusive: ['csv'],
-    description: 'hide table header from output',
-  }),
-  csv: flags.boolean({
-    exclusive: ['no-truncate'],
-    description: 'output is csv format',
-  }),
-  sort: flags.string({
-    description: 'property to sort by (prepend ' - ' for descending)',
-  }),
-  filter: flags.string({description: 'filter property by partial string matching, ex: name=foo'}),
 }
 
 module.exports = Base

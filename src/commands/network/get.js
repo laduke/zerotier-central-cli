@@ -1,4 +1,4 @@
-const Command = require('../../base.js')
+const Command = require('../../api-base.js')
 const makeTable = require('../../network-table.js')
 
 class GetNetwork extends Command {

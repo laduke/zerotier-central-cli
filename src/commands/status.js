@@ -1,5 +1,5 @@
 const {flags} = require('@oclif/command')
-const Command = require('../base.js')
+const Command = require('../api-base.js')
 const cli = require('cli-ux').default
 
 class StatusCommand extends Command {
@@ -29,7 +29,6 @@ not much here`
 
 StatusCommand.flags = {
   ...Command.flags,
-  name: flags.string({char: 'n', description: 'name to print'}),
 }
 
 module.exports = StatusCommand
