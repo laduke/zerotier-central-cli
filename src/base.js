@@ -8,8 +8,11 @@ class Base extends Command {
     const {flags} = this.parse(this.constructor)
     this.flags = flags
     this.conf = conf()
-    this.token = await this.getToken(flags)
-    this.central = _central({token: this.token})
+
+    const token = await this.getToken(flags)
+    const base = await this.getBase(flags)
+
+    this.central = _central({token, base})
   }
 
   getToken(flags) {
@@ -23,12 +26,26 @@ class Base extends Command {
 
     this.error('no API token. Use the setup command or the -t flag')
   }
+
+  getBase(flags) {
+    if (flags.apiBase) {
+      return flags.apiBase
+    }
+
+    if (this.conf.get('apiBase')) {
+      return this.conf.get('apiBase')
+    }
+  }
 }
 
 Base.flags = {
   token: flags.string({
     char: 't',
     description: 'my.zerotier.com api access token',
+  }),
+  apiBase: flags.string({
+    hidden: false,
+    description: 'use a different central instance my-dev.zerotier.com/api',
   }),
   json: flags.boolean({
     char: 'j',
