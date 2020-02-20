@@ -8,8 +8,16 @@ I'm still experimenting with how I want it to work.
 npm i -g @laduke/zerotier-central cli
 
 ## usage
-`ztc setup` (askes for your api token)
-
+there's help so
 `ztc help`
 
-there's help so
+### examples
+`ztc setup` (so you don't have to put your api token every time)
+
+`ztc network:list`
+
+`ztc member:list 6ab565387a82c205 --filter=online=true --sort=creation-time --columns="node-id,name,ip-assignments"`
+
+
+
+
