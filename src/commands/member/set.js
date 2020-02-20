@@ -1,6 +1,6 @@
 const {flags} = require('@oclif/command')
-const Command = require('../base.js')
-const makeTable = require('../member-table.js')
+const Command = require('../../base.js')
+const makeTable = require('../../member-table.js')
 
 class SetMember extends Command {
   async run() {
