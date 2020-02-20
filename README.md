@@ -23,7 +23,7 @@ $ npm install -g @laduke/zerotier-central-cli
 $ ztc COMMAND
 running command...
 $ ztc (-v|--version|version)
-@laduke/zerotier-central-cli/0.0.3 darwin-x64 node-v10.16.0
+@laduke/zerotier-central-cli/0.0.4 darwin-x64 node-v10.16.0
 $ ztc --help [COMMAND]
 USAGE
   $ ztc COMMAND
@@ -103,7 +103,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.3/src/commands/member/get.js)_
+_See code: [src/commands/member/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/member/get.js)_
 
 ## `ztc member:list NETWORKID`
 
@@ -125,7 +125,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.3/src/commands/member/list.js)_
+_See code: [src/commands/member/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/member/list.js)_
 
 ## `ztc member:set NETWORKID NODEID`
 
@@ -153,7 +153,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.3/src/commands/member/set.js)_
+_See code: [src/commands/member/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/member/set.js)_
 
 ## `ztc network:get NETWORKID`
 
@@ -175,7 +175,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.3/src/commands/network/get.js)_
+_See code: [src/commands/network/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/network/get.js)_
 
 ## `ztc network:list`
 
@@ -197,7 +197,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.3/src/commands/network/list.js)_
+_See code: [src/commands/network/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/network/list.js)_
 
 ## `ztc network:set NETWORKID`
 
@@ -231,7 +231,7 @@ OPTIONS
   --[no-]v6AutoAssign
 ```
 
-_See code: [src/commands/network/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.3/src/commands/network/set.js)_
+_See code: [src/commands/network/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/network/set.js)_
 
 ## `ztc setup`
 
@@ -253,7 +253,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.3/src/commands/setup.js)_
+_See code: [src/commands/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/setup.js)_
 
 ## `ztc status`
 
@@ -279,6 +279,5 @@ DESCRIPTION
   not much here
 ```
 
-_See code: [src/commands/status.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.3/src/commands/status.js)_
+_See code: [src/commands/status.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.4/src/commands/status.js)_
 <!-- commandsstop -->
-
