@@ -1,7 +1,7 @@
 const ux = require('cli-ux').default
-const conf = require('../conf.js')
+const conf = require('../../conf.js')
 
-const Command = require('../base.js')
+const Command = require('../../base.js')
 
 class SetupCommand extends Command {
   async init() {
@@ -18,6 +18,6 @@ class SetupCommand extends Command {
   }
 }
 
-SetupCommand.description = 'save your api token to disk.'
+SetupCommand.description = 'save your api token interactively.'
 
 module.exports = SetupCommand

@@ -42,6 +42,11 @@
   "main": "src/index.js",
   "oclif": {
     "commands": "./src/commands",
+    "topics": {
+      "conf": { "description": "manage ztc cli config/preferences"},
+      "network": { "description": "managed zerotier networks"},
+      "member": { "description": "managed zerotier network members"}
+    },
     "bin": "ztc",
     "plugins": [
       "@oclif/plugin-help",
