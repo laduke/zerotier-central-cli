@@ -32,7 +32,13 @@ USAGE
 <!-- usagestop -->
   # Commands
   <!-- commands -->
-* [`ztc autocomplete [SHELL]`](#ztc-autocomplete-shell)
+* [`ztc autocomplete:install`](#ztc-autocompleteinstall)
+* [`ztc autocomplete:uninstall`](#ztc-autocompleteuninstall)
+* [`ztc conf:clear`](#ztc-confclear)
+* [`ztc conf:delete`](#ztc-confdelete)
+* [`ztc conf:get`](#ztc-confget)
+* [`ztc conf:set`](#ztc-confset)
+* [`ztc conf:setup`](#ztc-confsetup)
 * [`ztc help [COMMAND]`](#ztc-help-command)
 * [`ztc member:get NETWORKID NODEID`](#ztc-memberget-networkid-nodeid)
 * [`ztc member:list NETWORKID`](#ztc-memberlist-networkid)
@@ -40,31 +46,108 @@ USAGE
 * [`ztc network:get NETWORKID`](#ztc-networkget-networkid)
 * [`ztc network:list`](#ztc-networklist)
 * [`ztc network:set NETWORKID`](#ztc-networkset-networkid)
-* [`ztc setup`](#ztc-setup)
 * [`ztc status`](#ztc-status)
 
-## `ztc autocomplete [SHELL]`
+## `ztc autocomplete:install`
 
-display autocomplete installation instructions
+setup autocomplete
 
 ```
 USAGE
-  $ ztc autocomplete [SHELL]
-
-ARGUMENTS
-  SHELL  shell type
+  $ ztc autocomplete:install
 
 OPTIONS
-  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
-
-EXAMPLES
-  $ ztc autocomplete
-  $ ztc autocomplete bash
-  $ ztc autocomplete zsh
-  $ ztc autocomplete --refresh-cache
+  -t, --token=token  my.zerotier.com api access token
+  --apiBase=apiBase  use a different central instance my-dev.zerotier.com/api
 ```
 
-_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.5/src/commands/autocomplete/index.ts)_
+_See code: [src/commands/autocomplete/install.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.6/src/commands/autocomplete/install.js)_
+
+## `ztc autocomplete:uninstall`
+
+setup autocomplete
+
+```
+USAGE
+  $ ztc autocomplete:uninstall
+
+OPTIONS
+  -t, --token=token  my.zerotier.com api access token
+  --apiBase=apiBase  use a different central instance my-dev.zerotier.com/api
+```
+
+_See code: [src/commands/autocomplete/uninstall.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.6/src/commands/autocomplete/uninstall.js)_
+
+## `ztc conf:clear`
+
+clear all config
+
+```
+USAGE
+  $ ztc conf:clear
+```
+
+_See code: [src/commands/conf/clear.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.6/src/commands/conf/clear.js)_
+
+## `ztc conf:delete`
+
+delete key from config
+
+```
+USAGE
+  $ ztc conf:delete
+
+OPTIONS
+  --apiBase
+  --token
+```
+
+_See code: [src/commands/conf/delete.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.6/src/commands/conf/delete.js)_
+
+## `ztc conf:get`
+
+print saved config
+
+```
+USAGE
+  $ ztc conf:get
+
+OPTIONS
+  --apiBase
+  --token
+```
+
+_See code: [src/commands/conf/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.6/src/commands/conf/get.js)_
+
+## `ztc conf:set`
+
+save config
+
+```
+USAGE
+  $ ztc conf:set
+
+OPTIONS
+  --apiBase=apiBase  save base url (https://my.zerotier.com/api/)
+  --token=token      save central api token
+```
+
+_See code: [src/commands/conf/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.6/src/commands/conf/set.js)_
+
+## `ztc conf:setup`
+
+save your api token interactively.
+
+```
+USAGE
+  $ ztc conf:setup
+
+OPTIONS
+  -t, --token=token  my.zerotier.com api access token
+  --apiBase=apiBase  use a different central instance my-dev.zerotier.com/api
+```
+
+_See code: [src/commands/conf/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.6/src/commands/conf/setup.js)_
 
 ## `ztc help [COMMAND]`
 
@@ -238,21 +321,6 @@ OPTIONS
 ```
 
 _See code: [src/commands/network/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.6/src/commands/network/set.js)_
-
-## `ztc setup`
-
-save your api token to disk.
-
-```
-USAGE
-  $ ztc setup
-
-OPTIONS
-  -t, --token=token  my.zerotier.com api access token
-  --apiBase=apiBase  use a different central instance my-dev.zerotier.com/api
-```
-
-_See code: [src/commands/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.6/src/commands/setup.js)_
 
 ## `ztc status`
 

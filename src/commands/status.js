@@ -1,4 +1,3 @@
-const {flags} = require('@oclif/command')
 const Command = require('../api-base.js')
 const cli = require('cli-ux').default
 

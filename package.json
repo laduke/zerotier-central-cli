@@ -50,8 +50,7 @@
     },
     "bin": "ztc",
     "plugins": [
-      "@oclif/plugin-help",
-      "@oclif/plugin-autocomplete"
+      "@oclif/plugin-help"
     ]
   },
   "repository": "laduke/zerotier-central-cli",

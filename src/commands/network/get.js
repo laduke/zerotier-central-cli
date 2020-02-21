@@ -6,7 +6,13 @@ class GetNetwork extends Command {
     const {flags} = this.parse(GetNetwork)
     const {
       args: {networkId},
+      argv,
     } = this.parse(GetNetwork)
+
+    if (argv.includes('--autocomplete')) {
+      return this.central.getNetworks()
+      .then(ns => ns.map(n => n.id))
+    }
 
     const network = await this.central.getNetwork(networkId)
 

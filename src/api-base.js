@@ -1,4 +1,4 @@
-const {Command, flags} = require('@oclif/command')
+const {flags} = require('@oclif/command')
 
 const _central = require('@laduke/zerotier-central-client')
 const conf = require('./conf.js')
