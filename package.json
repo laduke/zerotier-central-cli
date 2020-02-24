@@ -1,7 +1,7 @@
 {
   "name": "@laduke/zerotier-central-cli",
   "description": "Zerotier Central CLI",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Travis LaDuke @laduke",
   "bin": {
     "ztc": "./bin/run"
@@ -44,9 +44,15 @@
   "oclif": {
     "commands": "./src/commands",
     "topics": {
-      "conf": { "description": "manage ztc cli config/preferences"},
-      "network": { "description": "managed zerotier networks"},
-      "member": { "description": "managed zerotier network members"}
+      "conf": {
+        "description": "manage ztc cli config/preferences"
+      },
+      "network": {
+        "description": "managed zerotier networks"
+      },
+      "member": {
+        "description": "managed zerotier network members"
+      }
     },
     "bin": "ztc",
     "plugins": [
