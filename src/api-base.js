@@ -30,12 +30,12 @@ class ApiBase extends Base {
   }
 
   getBase(flags) {
-    if (flags.apiBase) {
-      return flags.apiBase
+    if (flags['api-base']) {
+      return flags['api-base']
     }
 
-    if (this.conf.get('apiBase')) {
-      return this.conf.get('apiBase')
+    if (this.conf.get('api-base')) {
+      return this.conf.get('api-base')
     }
   }
 }
@@ -46,6 +46,14 @@ ApiBase.flags = {
     char: 'j',
     description: 'output raw json',
     exclusive: ['csv'],
+  }),
+  token: flags.string({
+    char: 't',
+    description: 'my.zerotier.com api access token',
+  }),
+  'api-base': flags.string({
+    hidden: false,
+    description: 'use a different central instance my-dev.zerotier.com/api',
   }),
   extended: flags.boolean({char: 'e', description: 'extended output'}),
   columns: flags.string({char: 'c'}),

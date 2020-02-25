@@ -15,15 +15,16 @@ class CompletionCommand extends Command {
     const commands = getCommands(this.config)
 
     const withoutFlags = env.line.split(' ').filter(s => !s.startsWith('-'))
+
     const command = withoutFlags[1]
 
     if (isFlag(env)) {
-      tabtab.log(completeFlag(env, command, commands))
+      tabtab.log(completeFlag(env, command, commands) || [])
     } else if (isCommand(env)) {
-      tabtab.log(completeCommand(env, commands))
+      tabtab.log(completeCommand(env, commands) || [])
     } else {
       const arg = await completeArg(env, command)
-      tabtab.log(arg)
+      tabtab.log(arg || [])
     }
   }
 }
@@ -33,7 +34,12 @@ function isFlag(env) {
 }
 
 function isCommand(env) {
-  return env.line.split(' ').filter(s => !s.startsWith('-')).length === 2
+  return (
+    env.line
+    .split(' ')
+    .filter(s => s !== 'help')
+    .filter(s => !s.startsWith('-')).length === 2
+  )
 }
 
 function completeCommand(env, commands) {
@@ -67,7 +73,8 @@ function completeArg(env, command) {
 }
 
 function getCommands(config) {
-  return config.plugins.flatMap(plug => {
+  return config.plugins
+  .flatMap(plug => {
     return plug.commands
   })
   .filter(p => !p.hidden)
