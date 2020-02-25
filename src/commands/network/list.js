@@ -1,5 +1,3 @@
-const {flags} = require('@oclif/command')
-
 const Command = require('../../api-base.js')
 const makeTable = require('../../network-table.js')
 
@@ -8,6 +6,9 @@ class ListNetworks extends Command {
     const {flags} = this.parse(ListNetworks)
 
     const networks = await this.central.getNetworks()
+
+    // cache network ids
+    this.conf.set('networkIds', networks.map(n => n.id))
 
     if (flags.json) {
       this.log(JSON.stringify(networks, 0, 4))

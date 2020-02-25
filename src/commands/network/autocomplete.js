@@ -8,9 +8,17 @@ class Autocomplete extends Command {
     const [_, command] = withoutFlags
 
     if (command === 'network:set' || command === 'network:get') {
-      return this.central.getNetworks().then(ns => ns.map(n => n.id))
+      let networkIds = this.conf.get('networkIds') || []
+
+      if (networkIds.length === 0) {
+        networkIds = await this.central
+        .getNetworks()
+        .then(ns => ns.map(n => n.id))
+
+        this.conf.set('networkIds', networkIds || [])
+      }
+      return networkIds
     }
-    return []
   }
 }
 

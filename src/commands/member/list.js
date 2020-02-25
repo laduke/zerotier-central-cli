@@ -10,6 +10,12 @@ class ListMembers extends Command {
 
     const members = await this.central.getMembers(networkId)
 
+    // cache memberIds
+    this.conf.set('memberIds',
+      {
+        ...this.conf.get('memberIds'),  ...{[networkId]: members.map(n => n.nodeId)},
+      })
+
     if (flags.json) {
       this.log(JSON.stringify(members, 0, 4))
     } else {

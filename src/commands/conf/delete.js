@@ -29,6 +29,8 @@ DeleteCommand.description = 'delete key from config'
 DeleteCommand.flags = {
   token: flags.boolean(),
   apiBase: flags.boolean(),
+  memberIds: flags.boolean(),
+  networkIds: flags.boolean(),
 }
 
 module.exports = DeleteCommand

@@ -10,17 +10,44 @@ class Autocomplete extends Command {
 
     if (command === 'member:set' || command === 'member:get') {
       if (typeof nodeid === 'string') {
-        return this.central
-        .getMembers(nwid)
-        .then(ms => ms.map(m => m.nodeId).slice(0, 23))
+        const tmp = this.conf.get('memberIds') || {}
+        let members = tmp[nwid] || []
+
+        if (members.length === 0) {
+          members = await this.central
+          .getMembers(nwid)
+          .then(ms => ms.map(m => m.nodeId).slice(0, 23))
+
+          this.conf.set('memberIds', {
+            ...this.conf.get('memberIds'),
+            [nwid]: members,
+          })
+        }
+
+        return members
       }
-      return this.central.getNetworks().then(ns => ns.map(n => n.id))
+
+      return this.getNetworkIds()
     }
+
     if (command === 'member:list') {
-      return this.central.getNetworks().then(ns => ns.map(n => n.id))
+      return this.getNetworkIds()
     }
 
     return []
+  }
+
+  async getNetworkIds() {
+    let networkIds = this.conf.get('networkIds') || []
+
+    if (networkIds.length === 0) {
+      networkIds = await this.central
+      .getNetworks()
+      .then(ns => ns.map(n => n.id))
+      this.conf.set('networkIds', networkIds || [])
+    }
+
+    return networkIds
   }
 }
 

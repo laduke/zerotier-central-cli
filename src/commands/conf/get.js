@@ -11,7 +11,7 @@ class GetCommand extends Command {
 
   async run() {
     let keys = Object.keys(this.flags)
-    keys = keys.length > 0 ? keys : ['token', 'apiBase']
+    keys = keys.length > 0 ? keys : ['token', 'apiBase', 'networkIds', 'memberIds']
 
     const o = keys.reduce((acc, el) => {
       return {...acc, [el]: this.conf.get(el)}
