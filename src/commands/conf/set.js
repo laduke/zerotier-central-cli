@@ -28,7 +28,7 @@ SetCommand.description = 'save config'
 
 SetCommand.flags = {
   token: flags.string({description: 'save central api token'}),
-  apiBase: flags.string({
+  'api-base': flags.string({
     description: 'save base url (https://my.zerotier.com/api/)',
   }),
 }

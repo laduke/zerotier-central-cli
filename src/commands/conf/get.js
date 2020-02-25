@@ -11,7 +11,8 @@ class GetCommand extends Command {
 
   async run() {
     let keys = Object.keys(this.flags)
-    keys = keys.length > 0 ? keys : ['token', 'apiBase', 'networkIds', 'memberIds']
+    keys =
+      keys.length > 0 ? keys : ['token', 'api-base', 'networkIds', 'memberIds']
 
     const o = keys.reduce((acc, el) => {
       return {...acc, [el]: this.conf.get(el)}
@@ -25,7 +26,9 @@ GetCommand.description = 'print saved config'
 
 GetCommand.flags = {
   token: flags.boolean(),
-  apiBase: flags.boolean(),
+  'api-base': flags.boolean(),
+  networkIds: flags.boolean(),
+  memberIds: flags.boolean(),
 }
 
 module.exports = GetCommand
