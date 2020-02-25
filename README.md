@@ -4,7 +4,7 @@ Command Line Interface to my.zerotier.com
 
 Still experimenting with the commands/outputs.
 
-## install
+# Install
 `npm i -g @laduke/zerotier-central-cli`
 
 # examples
