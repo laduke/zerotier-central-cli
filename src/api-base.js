@@ -1,6 +1,6 @@
 const {flags} = require('@oclif/command')
 
-const _central = require('@laduke/zerotier-central-client')
+const _central = require('./central.js')
 const conf = require('./conf.js')
 
 const Base = require('./base.js')
@@ -14,7 +14,7 @@ class ApiBase extends Base {
     const token = await this.getToken(flags)
     const base = await this.getBase(flags)
 
-    this.central = _central({token, base})
+    this.central = _central({token, base}, this.error)
   }
 
   getToken(flags) {

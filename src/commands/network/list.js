@@ -5,19 +5,15 @@ class ListNetworks extends Command {
   async run() {
     const {flags} = this.parse(ListNetworks)
 
-    try {
-      const networks = await this.central.getNetworks()
+    const networks = await this.central.getNetworks()
 
-      // cache network ids
-      this.conf.set('networkIds', networks.map(n => n.id))
+    // cache network ids
+    this.conf.set('networkIds', networks.map(n => n.id))
 
-      if (flags.json) {
-        this.log(JSON.stringify(networks, 0, 4))
-      } else {
-        this.log(makeTable(networks, flags))
-      }
-    } catch (error) {
-      this.error(error.message)
+    if (flags.json) {
+      this.log(JSON.stringify(networks, 0, 4))
+    } else {
+      this.log(makeTable(networks, flags))
     }
   }
 }
