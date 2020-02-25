@@ -8,7 +8,7 @@ Still experimenting with the commands/outputs.
 npm i -g @laduke/zerotier-central-cli
 
 # examples
-`ztc setup` (so you don't have to put your api token every time)
+`ztc conf:setup` (so you don't have to put your api token every time)
 
 `ztc network:list`
 
