@@ -4,43 +4,43 @@ const rfc4193 = require('./rfc4193.js')
 
 module.exports = makeTable
 
-function makeTable(members, flags) {
+function makeTable (members, flags) {
   return cli.table(
     members,
     {
-      nodeId: {header: 'Node-ID'},
-      authorized: {get: row => row.config.authorized},
+      nodeId: { header: 'Node-ID' },
+      authorized: { get: row => row.config.authorized },
       name: {},
       online: {},
       description: {},
-      bridging: {get: row => row.config.activeBridge},
-      auto: {get: row => row.config.noAutoAssignIps},
+      bridging: { get: row => row.config.activeBridge },
+      auto: { get: row => row.config.noAutoAssignIps },
       ipAssignments: {
         header: 'IP-Assignments',
-        get: row => (row.config.ipAssignments || []).join('\n'),
+        get: row => (row.config.ipAssignments || []).join('\n')
       },
-      lastOnline: {header: 'Last-Online'},
+      lastOnline: { header: 'Last-Online' },
       creationTime: {
         get: row => row.config.creationTime,
-        header: 'Creation-Time',
+        header: 'Creation-Time'
       },
-      clientVersion: {header: 'Version'},
-      physicalAddress: {header: 'Physical-Address'},
+      clientVersion: { header: 'Version' },
+      physicalAddress: { header: 'Physical-Address' },
       hidden: {},
       '6plane': {
         header: '6PLANE',
-        description: {extended: true},
+        description: { extended: true },
         get: row => {
           return sixPlane(row.config.nwid, row.config.id)
-        },
+        }
       },
       rfc4193: {
         header: 'RFC4193',
-        description: {extended: true},
+        description: { extended: true },
         get: row => {
           return rfc4193(row.config.nwid, row.config.id)
-        },
-      },
+        }
+      }
     },
     flags
   )

@@ -1,14 +1,14 @@
 const conf = require('../../conf.js')
-const {flags} = require('@oclif/command')
+const { flags } = require('@oclif/command')
 
 const Command = require('../../base.js')
 
 class ClearCommand extends Command {
-  async init() {
+  async init () {
     this.conf = conf()
   }
 
-  async run() {
+  async run () {
     this.conf.clear()
     this.log('cleared all config')
   }

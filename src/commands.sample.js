@@ -11,15 +11,15 @@ module.exports = [
         a: {
           name: 'a',
           type: 'boolean',
-          allowNo: false,
+          allowNo: false
         },
         b: {
           name: 'b',
           type: 'boolean',
-          allowNo: false,
-        },
+          allowNo: false
+        }
       },
-      args: [],
+      args: []
     },
     {
       id: 'conf:clear',
@@ -28,7 +28,7 @@ module.exports = [
       pluginType: 'core',
       aliases: [],
       flags: {},
-      args: [],
+      args: []
     },
     {
       id: 'conf:delete',
@@ -40,15 +40,15 @@ module.exports = [
         token: {
           name: 'token',
           type: 'boolean',
-          allowNo: false,
+          allowNo: false
         },
         apiBase: {
           name: 'apiBase',
           type: 'boolean',
-          allowNo: false,
-        },
+          allowNo: false
+        }
       },
-      args: [],
+      args: []
     },
     {
       id: 'conf:get',
@@ -60,15 +60,15 @@ module.exports = [
         token: {
           name: 'token',
           type: 'boolean',
-          allowNo: false,
+          allowNo: false
         },
         apiBase: {
           name: 'apiBase',
           type: 'boolean',
-          allowNo: false,
-        },
+          allowNo: false
+        }
       },
-      args: [],
+      args: []
     },
     {
       id: 'conf:set',
@@ -80,15 +80,15 @@ module.exports = [
         token: {
           name: 'token',
           type: 'option',
-          description: 'save central api token',
+          description: 'save central api token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
-          description: 'save base url (https://my.zerotier.com/api/)',
-        },
+          description: 'save base url (https://my.zerotier.com/api/)'
+        }
       },
-      args: [],
+      args: []
     },
     {
       id: 'conf:setup',
@@ -101,17 +101,17 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
-        },
+          hidden: false
+        }
       },
-      args: [],
+      args: []
     },
     {
       id: 'list-pools',
@@ -125,22 +125,22 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
-        },
+          hidden: false
+        }
       },
       args: [
         {
           name: 'networkId',
-          required: true,
-        },
-      ],
+          required: true
+        }
+      ]
     },
     {
       id: 'list-routes',
@@ -154,22 +154,22 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
-        },
+          hidden: false
+        }
       },
       args: [
         {
           name: 'networkId',
-          required: true,
-        },
-      ],
+          required: true
+        }
+      ]
     },
     {
       id: 'member:get',
@@ -182,74 +182,74 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
+          hidden: false
         },
         json: {
           name: 'json',
           type: 'boolean',
           char: 'j',
           description: 'output raw json',
-          allowNo: false,
+          allowNo: false
         },
         extended: {
           name: 'extended',
           type: 'boolean',
           char: 'e',
           description: 'extended output',
-          allowNo: false,
+          allowNo: false
         },
         columns: {
           name: 'columns',
           type: 'option',
-          char: 'c',
+          char: 'c'
         },
         'no-truncate': {
           name: 'no-truncate',
           type: 'boolean',
           description: 'do not truncate output to fit screen',
-          allowNo: false,
+          allowNo: false
         },
         'no-header': {
           name: 'no-header',
           type: 'boolean',
           description: 'hide table header from output',
-          allowNo: false,
+          allowNo: false
         },
         csv: {
           name: 'csv',
           type: 'boolean',
           description: 'output is csv format',
-          allowNo: false,
+          allowNo: false
         },
         sort: {
           name: 'sort',
           type: 'option',
-          description: null,
+          description: null
         },
         filter: {
           name: 'filter',
           type: 'option',
           description:
-            'filter property by partial string matching, ex: name=foo',
-        },
+            'filter property by partial string matching, ex: name=foo'
+        }
       },
       args: [
         {
           name: 'networkId',
-          required: true,
+          required: true
         },
         {
           name: 'nodeId',
-          required: true,
-        },
-      ],
+          required: true
+        }
+      ]
     },
     {
       id: 'member:list',
@@ -262,70 +262,70 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
+          hidden: false
         },
         json: {
           name: 'json',
           type: 'boolean',
           char: 'j',
           description: 'output raw json',
-          allowNo: false,
+          allowNo: false
         },
         extended: {
           name: 'extended',
           type: 'boolean',
           char: 'e',
           description: 'extended output',
-          allowNo: false,
+          allowNo: false
         },
         columns: {
           name: 'columns',
           type: 'option',
-          char: 'c',
+          char: 'c'
         },
         'no-truncate': {
           name: 'no-truncate',
           type: 'boolean',
           description: 'do not truncate output to fit screen',
-          allowNo: false,
+          allowNo: false
         },
         'no-header': {
           name: 'no-header',
           type: 'boolean',
           description: 'hide table header from output',
-          allowNo: false,
+          allowNo: false
         },
         csv: {
           name: 'csv',
           type: 'boolean',
           description: 'output is csv format',
-          allowNo: false,
+          allowNo: false
         },
         sort: {
           name: 'sort',
           type: 'option',
-          description: null,
+          description: null
         },
         filter: {
           name: 'filter',
           type: 'option',
           description:
-            'filter property by partial string matching, ex: name=foo',
-        },
+            'filter property by partial string matching, ex: name=foo'
+        }
       },
       args: [
         {
           name: 'networkId',
-          required: true,
-        },
-      ],
+          required: true
+        }
+      ]
     },
     {
       id: 'member:set',
@@ -338,102 +338,102 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
+          hidden: false
         },
         json: {
           name: 'json',
           type: 'boolean',
           char: 'j',
           description: 'output raw json',
-          allowNo: false,
+          allowNo: false
         },
         extended: {
           name: 'extended',
           type: 'boolean',
           char: 'e',
           description: 'extended output',
-          allowNo: false,
+          allowNo: false
         },
         columns: {
           name: 'columns',
           type: 'option',
-          char: 'c',
+          char: 'c'
         },
         'no-truncate': {
           name: 'no-truncate',
           type: 'boolean',
           description: 'do not truncate output to fit screen',
-          allowNo: false,
+          allowNo: false
         },
         'no-header': {
           name: 'no-header',
           type: 'boolean',
           description: 'hide table header from output',
-          allowNo: false,
+          allowNo: false
         },
         csv: {
           name: 'csv',
           type: 'boolean',
           description: 'output is csv format',
-          allowNo: false,
+          allowNo: false
         },
         sort: {
           name: 'sort',
           type: 'option',
-          description: null,
+          description: null
         },
         filter: {
           name: 'filter',
           type: 'option',
           description:
-            'filter property by partial string matching, ex: name=foo',
+            'filter property by partial string matching, ex: name=foo'
         },
         authorized: {
           name: 'authorized',
           type: 'boolean',
-          allowNo: true,
+          allowNo: true
         },
         hidden: {
           name: 'hidden',
           type: 'boolean',
-          allowNo: true,
+          allowNo: true
         },
         name: {
           name: 'name',
-          type: 'option',
+          type: 'option'
         },
         description: {
           name: 'description',
-          type: 'option',
+          type: 'option'
         },
         activeBridge: {
           name: 'activeBridge',
           type: 'boolean',
-          allowNo: true,
+          allowNo: true
         },
         noAutoAssignIps: {
           name: 'noAutoAssignIps',
           type: 'boolean',
-          allowNo: true,
-        },
+          allowNo: true
+        }
       },
       args: [
         {
           name: 'networkId',
-          required: true,
+          required: true
         },
         {
           name: 'nodeId',
-          required: true,
-        },
-      ],
+          required: true
+        }
+      ]
     },
     {
       id: 'network:get',
@@ -446,70 +446,70 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
+          hidden: false
         },
         json: {
           name: 'json',
           type: 'boolean',
           char: 'j',
           description: 'output raw json',
-          allowNo: false,
+          allowNo: false
         },
         extended: {
           name: 'extended',
           type: 'boolean',
           char: 'e',
           description: 'extended output',
-          allowNo: false,
+          allowNo: false
         },
         columns: {
           name: 'columns',
           type: 'option',
-          char: 'c',
+          char: 'c'
         },
         'no-truncate': {
           name: 'no-truncate',
           type: 'boolean',
           description: 'do not truncate output to fit screen',
-          allowNo: false,
+          allowNo: false
         },
         'no-header': {
           name: 'no-header',
           type: 'boolean',
           description: 'hide table header from output',
-          allowNo: false,
+          allowNo: false
         },
         csv: {
           name: 'csv',
           type: 'boolean',
           description: 'output is csv format',
-          allowNo: false,
+          allowNo: false
         },
         sort: {
           name: 'sort',
           type: 'option',
-          description: null,
+          description: null
         },
         filter: {
           name: 'filter',
           type: 'option',
           description:
-            'filter property by partial string matching, ex: name=foo',
-        },
+            'filter property by partial string matching, ex: name=foo'
+        }
       },
       args: [
         {
           name: 'networkId',
-          required: true,
-        },
-      ],
+          required: true
+        }
+      ]
     },
     {
       id: 'network:list',
@@ -522,65 +522,65 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
+          hidden: false
         },
         json: {
           name: 'json',
           type: 'boolean',
           char: 'j',
           description: 'output raw json',
-          allowNo: false,
+          allowNo: false
         },
         extended: {
           name: 'extended',
           type: 'boolean',
           char: 'e',
           description: 'extended output',
-          allowNo: false,
+          allowNo: false
         },
         columns: {
           name: 'columns',
           type: 'option',
-          char: 'c',
+          char: 'c'
         },
         'no-truncate': {
           name: 'no-truncate',
           type: 'boolean',
           description: 'do not truncate output to fit screen',
-          allowNo: false,
+          allowNo: false
         },
         'no-header': {
           name: 'no-header',
           type: 'boolean',
           description: 'hide table header from output',
-          allowNo: false,
+          allowNo: false
         },
         csv: {
           name: 'csv',
           type: 'boolean',
           description: 'output is csv format',
-          allowNo: false,
+          allowNo: false
         },
         sort: {
           name: 'sort',
           type: 'option',
-          description: null,
+          description: null
         },
         filter: {
           name: 'filter',
           type: 'option',
           description:
-            'filter property by partial string matching, ex: name=foo',
-        },
+            'filter property by partial string matching, ex: name=foo'
+        }
       },
-      args: [],
+      args: []
     },
     {
       id: 'network:set',
@@ -593,127 +593,127 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
+          hidden: false
         },
         json: {
           name: 'json',
           type: 'boolean',
           char: 'j',
           description: 'output raw json',
-          allowNo: false,
+          allowNo: false
         },
         extended: {
           name: 'extended',
           type: 'boolean',
           char: 'e',
           description: 'extended output',
-          allowNo: false,
+          allowNo: false
         },
         columns: {
           name: 'columns',
           type: 'option',
-          char: 'c',
+          char: 'c'
         },
         'no-truncate': {
           name: 'no-truncate',
           type: 'boolean',
           description: 'do not truncate output to fit screen',
-          allowNo: false,
+          allowNo: false
         },
         'no-header': {
           name: 'no-header',
           type: 'boolean',
           description: 'hide table header from output',
-          allowNo: false,
+          allowNo: false
         },
         csv: {
           name: 'csv',
           type: 'boolean',
           description: 'output is csv format',
-          allowNo: false,
+          allowNo: false
         },
         sort: {
           name: 'sort',
           type: 'option',
-          description: null,
+          description: null
         },
         filter: {
           name: 'filter',
           type: 'option',
           description:
-            'filter property by partial string matching, ex: name=foo',
+            'filter property by partial string matching, ex: name=foo'
         },
         name: {
           name: 'name',
-          type: 'option',
+          type: 'option'
         },
         description: {
           name: 'description',
-          type: 'option',
+          type: 'option'
         },
         enableBroadcast: {
           name: 'enableBroadcast',
           type: 'boolean',
-          allowNo: true,
+          allowNo: true
         },
         private: {
           name: 'private',
           type: 'boolean',
-          allowNo: true,
+          allowNo: true
         },
         multicastLimit: {
           name: 'multicastLimit',
-          type: 'option',
+          type: 'option'
         },
         mtu: {
           name: 'mtu',
-          type: 'option',
+          type: 'option'
         },
         v4AutoAssign: {
           name: 'v4AutoAssign',
           type: 'boolean',
-          allowNo: true,
+          allowNo: true
         },
         v6AutoAssign: {
           name: 'v6AutoAssign',
           type: 'boolean',
-          allowNo: true,
+          allowNo: true
         },
         '6plane': {
           name: '6plane',
           type: 'boolean',
-          allowNo: true,
+          allowNo: true
         },
         rfc4193: {
           name: 'rfc4193',
           type: 'boolean',
-          allowNo: true,
+          allowNo: true
         },
         ipAssignmentPools: {
           name: 'ipAssignmentPools',
           type: 'option',
-          description: '<rangeStart>-<rangeEnd> overwrites existing',
+          description: '<rangeStart>-<rangeEnd> overwrites existing'
         },
         routes: {
           name: 'routes',
           type: 'option',
           description:
-            '<target>[-via] overwrites existing. Can specify multiple',
-        },
+            '<target>[-via] overwrites existing. Can specify multiple'
+        }
       },
       args: [
         {
           name: 'networkId',
-          required: true,
-        },
-      ],
+          required: true
+        }
+      ]
     },
     {
       id: 'status',
@@ -726,65 +726,65 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
+          hidden: false
         },
         json: {
           name: 'json',
           type: 'boolean',
           char: 'j',
           description: 'output raw json',
-          allowNo: false,
+          allowNo: false
         },
         extended: {
           name: 'extended',
           type: 'boolean',
           char: 'e',
           description: 'extended output',
-          allowNo: false,
+          allowNo: false
         },
         columns: {
           name: 'columns',
           type: 'option',
-          char: 'c',
+          char: 'c'
         },
         'no-truncate': {
           name: 'no-truncate',
           type: 'boolean',
           description: 'do not truncate output to fit screen',
-          allowNo: false,
+          allowNo: false
         },
         'no-header': {
           name: 'no-header',
           type: 'boolean',
           description: 'hide table header from output',
-          allowNo: false,
+          allowNo: false
         },
         csv: {
           name: 'csv',
           type: 'boolean',
           description: 'output is csv format',
-          allowNo: false,
+          allowNo: false
         },
         sort: {
           name: 'sort',
           type: 'option',
-          description: null,
+          description: null
         },
         filter: {
           name: 'filter',
           type: 'option',
           description:
-            'filter property by partial string matching, ex: name=foo',
-        },
+            'filter property by partial string matching, ex: name=foo'
+        }
       },
-      args: [],
+      args: []
     },
     {
       id: 'tabtab:install',
@@ -797,17 +797,17 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
-        },
+          hidden: false
+        }
       },
-      args: [],
+      args: []
     },
     {
       id: 'tabtab:uninstall',
@@ -820,17 +820,17 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
-        },
+          hidden: false
+        }
       },
-      args: [],
+      args: []
     },
     {
       id: 'tabtab:use',
@@ -843,18 +843,18 @@ module.exports = [
           name: 'token',
           type: 'option',
           char: 't',
-          description: 'my.zerotier.com api access token',
+          description: 'my.zerotier.com api access token'
         },
         apiBase: {
           name: 'apiBase',
           type: 'option',
           description:
             'use a different central instance my-dev.zerotier.com/api',
-          hidden: false,
-        },
+          hidden: false
+        }
       },
-      args: [],
-    },
+      args: []
+    }
   ],
   [
     {
@@ -868,25 +868,25 @@ module.exports = [
           name: 'all',
           type: 'boolean',
           description: 'see all commands in CLI',
-          allowNo: false,
-        },
+          allowNo: false
+        }
       },
       args: [
         {
           name: 'command',
           description: 'command to show help for',
-          required: false,
-        },
-      ],
-    },
-  ],
+          required: false
+        }
+      ]
+    }
+  ]
 ]
 
-var env = {complete: true,
+var env = { complete: true,
   words: 1,
   point: 8,
   line: 'ztc conf',
   partial: 'ztc conf',
   last: 'conf',
   lastPartial: 'conf',
-  prev: 'ztc'}
+  prev: 'ztc' }

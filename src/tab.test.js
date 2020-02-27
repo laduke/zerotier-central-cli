@@ -13,22 +13,22 @@ const ids = [
   'tabtab:install',
   'tabtab:uninstall',
   'tabtab:use',
-  'help',
+  'help'
 ]
 
-function Node(value) {
+function Node (value) {
   this.$value = value
   this.$parent = null
   this.$children = []
 }
 
-function Tree(value) {
+function Tree (value) {
   var node = new Node(value)
   this.$root = node
 }
 
-Tree.prototype.traverseDF = function traverseDF(callback) {
-  (function recurse(currentNode) {
+Tree.prototype.traverseDF = function traverseDF (callback) {
+  (function recurse (currentNode) {
     for (var i = 0, length = currentNode.$children.length; i < length; i++) {
       recurse(currentNode.$children[i])
     }

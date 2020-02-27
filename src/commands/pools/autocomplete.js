@@ -2,7 +2,7 @@ const tabtab = require('tabtab')
 const Command = require('../../api-base.js')
 
 class Autocomplete extends Command {
-  async run() {
+  async run () {
     const env = tabtab.parseEnv(process.env)
     const withoutFlags = env.line.split(' ').filter(s => !s.startsWith('-'))
     const [_, command] = withoutFlags
@@ -12,8 +12,8 @@ class Autocomplete extends Command {
 
       if (networkIds.length === 0) {
         networkIds = await this.central
-        .getNetworks()
-        .then(ns => ns.map(n => n.id))
+          .getNetworks()
+          .then(ns => ns.map(n => n.id))
 
         this.conf.set('networkIds', networkIds || [])
       }
@@ -22,13 +22,13 @@ class Autocomplete extends Command {
   }
 }
 
-Autocomplete.args = [{name: 'networkId', required: true}]
+Autocomplete.args = [{ name: 'networkId', required: true }]
 
 Autocomplete.strict = false
 Autocomplete.hidden = true
 
 Autocomplete.flags = {
-  ...Command.flags,
+  ...Command.flags
 }
 
 module.exports = Autocomplete

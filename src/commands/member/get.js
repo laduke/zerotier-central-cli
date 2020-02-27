@@ -2,10 +2,10 @@ const Command = require('../../api-base.js')
 const makeTable = require('../../member-table.js')
 
 class GetMember extends Command {
-  async run() {
-    const {flags} = this.parse(GetMember)
+  async run () {
+    const { flags } = this.parse(GetMember)
     const {
-      args: {networkId, nodeId},
+      args: { networkId, nodeId }
     } = this.parse(GetMember)
 
     const member = await this.central.getMember(networkId, nodeId)
@@ -20,12 +20,12 @@ class GetMember extends Command {
 
 GetMember.description = 'get one member'
 GetMember.args = [
-  {name: 'networkId', required: true},
-  {name: 'nodeId', required: true},
+  { name: 'networkId', required: true },
+  { name: 'nodeId', required: true }
 ]
 
 GetMember.flags = {
-  ...Command.flags,
+  ...Command.flags
 }
 
 module.exports = GetMember

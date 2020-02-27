@@ -2,8 +2,8 @@ const Command = require('../../api-base.js')
 const makeTable = require('../../network-table.js')
 
 class ListNetworks extends Command {
-  async run() {
-    const {flags} = this.parse(ListNetworks)
+  async run () {
+    const { flags } = this.parse(ListNetworks)
 
     const networks = await this.central.getNetworks()
 
@@ -21,7 +21,7 @@ class ListNetworks extends Command {
 ListNetworks.description = 'list your networks'
 
 ListNetworks.flags = {
-  ...Command.flags,
+  ...Command.flags
 }
 
 module.exports = ListNetworks

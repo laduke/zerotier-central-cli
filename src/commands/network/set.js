@@ -1,17 +1,17 @@
 const assert = require('assert')
-const {flags} = require('@oclif/command')
+const { flags } = require('@oclif/command')
 const Command = require('../../api-base.js')
 const isIp = require('is-ip')
 const isCidr = require('is-cidr')
 
 const makeTable = require('../../network-table.js')
-const {Network} = require('../../network/network-object')
+const { Network } = require('../../network/network-object')
 
 class SetNetwork extends Command {
-  async run() {
-    const {flags} = this.parse(SetNetwork)
+  async run () {
+    const { flags } = this.parse(SetNetwork)
     const {
-      args: {networkId},
+      args: { networkId }
     } = this.parse(SetNetwork)
 
     const newFlat = Network.fromObj(fromFlags(flags))
@@ -31,10 +31,10 @@ class SetNetwork extends Command {
     }
   }
 
-  validate(newFlat) {
+  validate (newFlat) {
     try {
       if (newFlat.ipAssignmentPools) {
-        newFlat.ipAssignmentPools.forEach(({ipRangeStart, ipRangeEnd}) => {
+        newFlat.ipAssignmentPools.forEach(({ ipRangeStart, ipRangeEnd }) => {
           assert(
             isIp(ipRangeStart),
             'ipRangeStart should be an IP address. Got: ' + ipRangeStart
@@ -47,7 +47,7 @@ class SetNetwork extends Command {
       }
 
       if (newFlat.routes) {
-        newFlat.routes.forEach(({target, via}) => {
+        newFlat.routes.forEach(({ target, via }) => {
           assert(
             isCidr(target),
             'Target subnet should be in CIDR notation. Got: ' + target
@@ -63,11 +63,11 @@ class SetNetwork extends Command {
     }
   }
 }
-function strip(obj) {
+function strip (obj) {
   return JSON.parse(JSON.stringify(obj))
 }
 
-function fromFlags(flags) {
+function fromFlags (flags) {
   const {
     routes,
     description,
@@ -80,7 +80,7 @@ function fromFlags(flags) {
     v6AutoAssign: zt6,
     '6plane': sixPlane,
     rfc4193,
-    ipAssignmentPools,
+    ipAssignmentPools
   } = flags
 
   return {
@@ -95,51 +95,51 @@ function fromFlags(flags) {
     mtu,
     zt4,
     zt6,
-    ipAssignmentPools,
+    ipAssignmentPools
   }
 }
 
 SetNetwork.description = 'change config'
-SetNetwork.args = [{name: 'networkId', required: true}]
+SetNetwork.args = [{ name: 'networkId', required: true }]
 
 SetNetwork.flags = {
   ...Command.flags,
-  'dry-run': flags.boolean({char: 'n'}),
-  name: flags.string({allowNo: false}),
-  description: flags.string({allowNo: false}),
+  'dry-run': flags.boolean({ char: 'n' }),
+  name: flags.string({ allowNo: false }),
+  description: flags.string({ allowNo: false }),
 
-  enableBroadcast: flags.boolean({allowNo: true}),
-  private: flags.boolean({allowNo: true}),
+  enableBroadcast: flags.boolean({ allowNo: true }),
+  private: flags.boolean({ allowNo: true }),
 
-  multicastLimit: flags.string({allowNo: false}),
-  mtu: flags.string({allowNo: false}),
+  multicastLimit: flags.string({ allowNo: false }),
+  mtu: flags.string({ allowNo: false }),
 
-  v4AutoAssign: flags.boolean({allowNo: true}),
-  v6AutoAssign: flags.boolean({allowNo: true}),
-  '6plane': flags.boolean({allowNo: true}),
-  rfc4193: flags.boolean({allowNo: true}),
+  v4AutoAssign: flags.boolean({ allowNo: true }),
+  v6AutoAssign: flags.boolean({ allowNo: true }),
+  '6plane': flags.boolean({ allowNo: true }),
+  rfc4193: flags.boolean({ allowNo: true }),
 
   ipAssignmentPools: flags.string({
     description: '<rangeStart>-<rangeEnd> overwrites existing',
     multiple: true,
     parse: input => {
       return [input.split('-')].reduce((acc, a) => {
-        return {...acc, ipRangeStart: a[0], ipRangeEnd: a[1]}
+        return { ...acc, ipRangeStart: a[0], ipRangeEnd: a[1] }
       }, {})
     },
-    allowNo: false,
+    allowNo: false
   }),
   routes: flags.string({
     description: '<target>[-via] overwrites existing. Can specify multiple',
     multiple: true,
     parse: input => {
       return [input.split('-')].reduce(
-        (acc, a) => ({...acc, target: a[0], via: a[1]}),
+        (acc, a) => ({ ...acc, target: a[0], via: a[1] }),
         {}
       )
     },
-    allowNo: true,
-  }),
+    allowNo: true
+  })
 }
 
 module.exports = SetNetwork

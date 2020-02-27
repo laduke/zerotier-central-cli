@@ -1,3 +1,3 @@
 const Conf = require('conf')
 
-module.exports = () => new Conf({projectName: 'zerotier-central-cli'})
+module.exports = () => new Conf({ projectName: 'zerotier-central-cli' })

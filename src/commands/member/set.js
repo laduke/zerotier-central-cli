@@ -1,20 +1,22 @@
-const {flags} = require('@oclif/command')
+const { flags } = require('@oclif/command')
 const Command = require('../../api-base.js')
 const makeTable = require('../../member-table.js')
 
 class SetMember extends Command {
-  async run() {
-    const {flags} = this.parse(SetMember)
+  async run () {
+    const { flags } = this.parse(SetMember)
     const {
-      args: {networkId, nodeId},
+      args: { networkId, nodeId }
     } = this.parse(SetMember)
 
-    const {hidden, name, description} = flags
-    const {authorized, activeBridge, noAutoAssignIps} = flags
+    const { hidden, name, description } = flags
+    const { authorized, activeBridge, noAutoAssignIps } = flags
 
     const data = {
-      hidden, name, description,
-      config: {authorized, activeBridge, noAutoAssignIps},
+      hidden,
+      name,
+      description,
+      config: { authorized, activeBridge, noAutoAssignIps }
     }
 
     // strip keys with undefined values
@@ -32,18 +34,18 @@ class SetMember extends Command {
 
 SetMember.description = 'change config'
 SetMember.args = [
-  {name: 'networkId', required: true},
-  {name: 'nodeId', required: true},
+  { name: 'networkId', required: true },
+  { name: 'nodeId', required: true }
 ]
 
 SetMember.flags = {
   ...Command.flags,
-  authorized: flags.boolean({allowNo: true}),
-  hidden: flags.boolean({allowNo: true}),
-  name: flags.string({allowNo: false}),
-  description: flags.string({allowNo: false}),
-  activeBridge: flags.boolean({allowNo: true}),
-  noAutoAssignIps: flags.boolean({allowNo: true}),
+  authorized: flags.boolean({ allowNo: true }),
+  hidden: flags.boolean({ allowNo: true }),
+  name: flags.string({ allowNo: false }),
+  description: flags.string({ allowNo: false }),
+  activeBridge: flags.boolean({ allowNo: true }),
+  noAutoAssignIps: flags.boolean({ allowNo: true })
 }
 
 module.exports = SetMember

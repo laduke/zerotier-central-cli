@@ -1,15 +1,15 @@
 const conf = require('../../conf.js')
-const {flags} = require('@oclif/command')
+const { flags } = require('@oclif/command')
 
 const Command = require('../../base.js')
 
 class DeleteCommand extends Command {
-  async init() {
+  async init () {
     this.conf = conf()
     this.flags = this.parse(this.constructor).flags
   }
 
-  async run() {
+  async run () {
     const keys = Object.keys(this.flags)
 
     keys.forEach(flag => {
@@ -17,7 +17,7 @@ class DeleteCommand extends Command {
     })
 
     const o = keys.reduce((acc, el) => {
-      return {...acc, [el]: this.conf.get(el)}
+      return { ...acc, [el]: this.conf.get(el) }
     }, {})
 
     this.log(JSON.parse(JSON.stringify(o)))
@@ -30,7 +30,7 @@ DeleteCommand.flags = {
   token: flags.boolean(),
   'api-base': flags.boolean(),
   memberIds: flags.boolean(),
-  networkIds: flags.boolean(),
+  networkIds: flags.boolean()
 }
 
 module.exports = DeleteCommand

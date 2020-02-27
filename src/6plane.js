@@ -1,7 +1,7 @@
 var splitBy2Re = /.{1,2}/g
 var splitBy4Re = /.{1,4}/g
 
-function sixPlane(networkId, nodeId) {
+function sixPlane (networkId, nodeId) {
   var bytes = networkId.match(splitBy2Re)
 
   // split network id into bytes, d5e04297a19bbd70
@@ -14,11 +14,11 @@ function sixPlane(networkId, nodeId) {
 
   // string -> list string
   var networkPart = bytes
-  .map(parse16)
-  .map(xor)
-  .map(toHexString)
-  .slice(0, 4)
-  .map(pad)
+    .map(parse16)
+    .map(xor)
+    .map(toHexString)
+    .slice(0, 4)
+    .map(pad)
 
   // split nodeId into bytes, keep only first 5
   // there are only 5 bytes; can't remember if slice was necessary
@@ -29,32 +29,32 @@ function sixPlane(networkId, nodeId) {
   // split into 2 byte sections, like an ipv6 address
   // list string -> string
   var result = ['fc']
-  .concat(networkPart)
-  .concat(nodePart)
-  .concat(['00', '00', '00', '00', '00', '01'])
-  .join('')
-  .match(splitBy4Re)
-  .join(':')
+    .concat(networkPart)
+    .concat(nodePart)
+    .concat(['00', '00', '00', '00', '00', '01'])
+    .join('')
+    .match(splitBy4Re)
+    .join(':')
 
   return result
 
   // hex string -> number
-  function parse16(substr) {
+  function parse16 (substr) {
     return parseInt(substr, 16)
   }
 
   // (number -> idx -> array) -> number
-  function xor(substr, idx, arr) {
+  function xor (substr, idx, arr) {
     return substr ^ arr[idx + 4]
   }
 
   // hex number -> string
-  function toHexString(byte) {
+  function toHexString (byte) {
     return byte.toString(16).toLowerCase()
   }
 
   // string -> string
-  function pad(byte) {
+  function pad (byte) {
     return byte.length === 2 ? byte : '0' + byte
   }
 }

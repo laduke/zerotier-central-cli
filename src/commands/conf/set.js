@@ -1,15 +1,15 @@
 const conf = require('../../conf.js')
-const {flags} = require('@oclif/command')
+const { flags } = require('@oclif/command')
 
 const Command = require('../../base.js')
 
 class SetCommand extends Command {
-  async init() {
+  async init () {
     this.conf = conf()
     this.flags = this.parse(this.constructor).flags
   }
 
-  async run() {
+  async run () {
     const keys = Object.keys(this.flags)
 
     keys.forEach(flag => {
@@ -17,7 +17,7 @@ class SetCommand extends Command {
     })
 
     const o = keys.reduce((acc, el) => {
-      return {...acc, [el]: this.conf.get(el)}
+      return { ...acc, [el]: this.conf.get(el) }
     }, {})
 
     this.log(JSON.parse(JSON.stringify(o)))
@@ -27,10 +27,10 @@ class SetCommand extends Command {
 SetCommand.description = 'save config'
 
 SetCommand.flags = {
-  token: flags.string({description: 'save central api token'}),
+  token: flags.string({ description: 'save central api token' }),
   'api-base': flags.string({
-    description: 'save base url (https://my.zerotier.com/api/)',
-  }),
+    description: 'save base url (https://my.zerotier.com/api/)'
+  })
 }
 
 module.exports = SetCommand

@@ -1,13 +1,13 @@
 const cli = require('cli-ux').default
-const {flags} = require('@oclif/command')
+const { flags } = require('@oclif/command')
 
 const Command = require('../../api-base.js')
 
 class AddPool extends Command {
-  async run() {
-    const {flags} = this.parse(AddPool)
+  async run () {
+    const { flags } = this.parse(AddPool)
     const {
-      args: {networkId, start, end},
+      args: { networkId, start, end }
     } = this.parse(AddPool)
 
     // console.log(networkId, start, end)
@@ -22,12 +22,12 @@ class AddPool extends Command {
   }
 }
 
-function makeTable(routes, flags) {
+function makeTable (routes, flags) {
   return cli.table(
     routes,
     {
-      ipRangeStart: {header: 'Start'},
-      ipRangeEnd: {header: 'End'},
+      ipRangeStart: { header: 'Start' },
+      ipRangeEnd: { header: 'End' }
     },
     flags
   )
@@ -35,13 +35,13 @@ function makeTable(routes, flags) {
 
 AddPool.description = 'list the ip auto-assign pools on a network'
 AddPool.args = [
-  {name: 'networkId', required: true},
-  {name: 'start', required: true, description: 'IP address'},
-  {name: 'end', required: true, description: 'IP address'},
+  { name: 'networkId', required: true },
+  { name: 'start', required: true, description: 'IP address' },
+  { name: 'end', required: true, description: 'IP address' }
 ]
 
 AddPool.flags = {
-  ...Command.flags,
+  ...Command.flags
 }
 
 module.exports = AddPool

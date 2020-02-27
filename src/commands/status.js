@@ -2,8 +2,8 @@ const Command = require('../api-base.js')
 const cli = require('cli-ux').default
 
 class StatusCommand extends Command {
-  async run() {
-    const {flags} = this.parse(StatusCommand)
+  async run () {
+    const { flags } = this.parse(StatusCommand)
     const name = flags.name || 'world'
     this.log(
       `hello ${name} from /Users/travis/src/zerotier-central-cli/src/commands/status.js`
@@ -19,15 +19,15 @@ class StatusCommand extends Command {
   }
 }
 
-function makeTable(status, flags) {
-  return cli.table([status], {version: {}, apiVersion: {}}, flags)
+function makeTable (status, flags) {
+  return cli.table([status], { version: {}, apiVersion: {} }, flags)
 }
 
 StatusCommand.description = `my.zerotier.com status
 not much here`
 
 StatusCommand.flags = {
-  ...Command.flags,
+  ...Command.flags
 }
 
 module.exports = StatusCommand

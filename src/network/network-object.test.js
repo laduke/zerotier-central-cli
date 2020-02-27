@@ -1,6 +1,6 @@
 const test = require('tape')
 
-let {Network, keys} = require('./network-object.js')
+let { Network, keys } = require('./network-object.js')
 
 test('empty', t => {
   let n = Network.fromObj()
@@ -11,7 +11,7 @@ test('empty', t => {
 
 test('one thing', t => {
   let description = '2'
-  let network = Network.fromObj({description})
+  let network = Network.fromObj({ description })
 
   t.notOk(network.toJSON().config)
   t.equal(description, network.description)
@@ -24,13 +24,13 @@ test('merge', t => {
     name: 'g',
     description: 'd',
     private: false,
-    multicastLimit: 0,
+    multicastLimit: 0
   })
   let network2 = network.merge({
     name: 'k',
     description: null,
     private: true,
-    multicastLimit: 1,
+    multicastLimit: 1
   })
 
   t.equal(network2.name, 'k')
@@ -44,7 +44,7 @@ test('merge', t => {
 test('it ignores weird keys', t => {
   let network = Network.fromObj()
 
-  let network2 = network.merge({foojiwooji: 1})
+  let network2 = network.merge({ foojiwooji: 1 })
 
   t.deepEqual(network2.toJSON(), {})
   t.ok(network2 instanceof Network)

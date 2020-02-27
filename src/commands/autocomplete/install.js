@@ -1,24 +1,24 @@
 const tabtab = require('tabtab')
 
-const {flags} = require('@oclif/command')
+const { flags } = require('@oclif/command')
 const Command = require('../../base.js')
 
 class InstallCommand extends Command {
-  async run() {
+  async run () {
     // const {flags} = this.parse(InstallCommand)
     await tabtab
-    .install({
-      name: 'ztc',
-      completer: 'ztc',
-    })
-    .catch(err => console.error('INSTALL ERROR', err))
+      .install({
+        name: 'ztc',
+        completer: 'ztc'
+      })
+      .catch(err => console.error('INSTALL ERROR', err))
   }
 }
 
 InstallCommand.description = 'setup autocomplete'
 
 InstallCommand.flags = {
-  ...Command.flags,
+  ...Command.flags
 }
 
 module.exports = InstallCommand
