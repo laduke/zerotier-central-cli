@@ -19,40 +19,40 @@ const keys = [
   'name',
   'mtu',
   'zt4',
-  'zt6',
+  'zt6'
 ]
 
 class Network {
-  constructor(n) {
-    for (let p in n) {
+  constructor (n) {
+    for (const p in n) {
       if (keys.includes(p)) {
         this[p] = n[p]
       }
     }
   }
 
-  static fromObj(n = {}) {
+  static fromObj (n = {}) {
     return new Network(n)
   }
 
-  static fromJSON(n = {}) {
+  static fromJSON (n = {}) {
     return new Network(flatten(n))
   }
 
-  merge(that) {
+  merge (that) {
     // only props that are set in `that` will be added
     // or overwritten from the orig network
-    return Network.fromObj({...this, ...omitEmpty(that)})
+    return Network.fromObj({ ...this, ...omitEmpty(that) })
   }
 
-  toJSON() {
-    let x = omitEmpty(nest(this))
+  toJSON () {
+    const x = omitEmpty(nest(this))
 
     return x
   }
 }
 
-function nest(o) {
+function nest (o) {
   const {
     ipAssignmentPools,
     enableBroadcast,
@@ -70,7 +70,7 @@ function nest(o) {
     name,
     mtu,
     zt4,
-    zt6,
+    zt6
   } = o
 
   return {
@@ -88,13 +88,13 @@ function nest(o) {
       tags,
       name,
       mtu,
-      v4AssignMode: {zt: zt4},
-      v6AssignMode: {zt: zt6, '6plane': plane, rfc4193},
-    },
+      v4AssignMode: { zt: zt4 },
+      v6AssignMode: { zt: zt6, '6plane': plane, rfc4193 }
+    }
   }
 }
 
-function flatten(o) {
+function flatten (o) {
   const {
     description = '',
     rulesSource = '',
@@ -110,9 +110,9 @@ function flatten(o) {
       name = '',
       tags = [],
       mtu,
-      v4AssignMode: {zt: zt4} = {},
-      v6AssignMode: {zt: zt6, rfc4193, '6plane': plane} = {},
-    } = {},
+      v4AssignMode: { zt: zt4 } = {},
+      v6AssignMode: { zt: zt6, rfc4193, '6plane': plane } = {}
+    } = {}
   } = o
 
   return {
@@ -132,8 +132,8 @@ function flatten(o) {
     tags,
     mtu,
     zt4,
-    zt6,
+    zt6
   }
 }
 
-module.exports = {Network, keys}
+module.exports = { Network, keys }
