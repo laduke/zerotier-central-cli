@@ -1,5 +1,4 @@
 const conf = require('../../conf.js')
-const { flags } = require('@oclif/command')
 
 const Command = require('../../base.js')
 

@@ -8,7 +8,7 @@ const _central = require('@laduke/zerotier-central-client')
 module.exports = function (opts, print = console.error) { // eslint-disable-line no-console
   const central = _central(opts)
 
-  for (let method in central) {
+  for (const method in central) {
     if (typeof central[method] === 'function') {
       const og = central[method]
       central[method] = async function (...args) {

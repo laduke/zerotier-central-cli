@@ -1,5 +1,4 @@
 const cli = require('cli-ux').default
-const { flags } = require('@oclif/command')
 
 const Command = require('../../api-base.js')
 
@@ -7,11 +6,9 @@ class AddPool extends Command {
   async run () {
     const { flags } = this.parse(AddPool)
     const {
-      args: { networkId, start, end }
+      args: { networkId }
     } = this.parse(AddPool)
 
-    // console.log(networkId, start, end)
-    const oldNetwork = await this.central.getNetwork(networkId)
     const network = await this.central.setNetwork(networkId, {})
 
     if (flags.json) {

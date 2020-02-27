@@ -1,6 +1,5 @@
 const tabtab = require('tabtab')
 
-const { flags } = require('@oclif/command')
 const Command = require('../../base.js')
 
 class InstallCommand extends Command {

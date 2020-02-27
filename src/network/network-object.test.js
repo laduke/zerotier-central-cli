@@ -1,17 +1,17 @@
 const test = require('tape')
 
-let { Network, keys } = require('./network-object.js')
+const { Network, keys } = require('./network-object.js')
 
 test('empty', t => {
-  let n = Network.fromObj()
+  const n = Network.fromObj()
   t.deepEqual(n.toJSON(), {})
 
   t.end()
 })
 
 test('one thing', t => {
-  let description = '2'
-  let network = Network.fromObj({ description })
+  const description = '2'
+  const network = Network.fromObj({ description })
 
   t.notOk(network.toJSON().config)
   t.equal(description, network.description)
@@ -20,13 +20,13 @@ test('one thing', t => {
 })
 
 test('merge', t => {
-  let network = Network.fromObj({
+  const network = Network.fromObj({
     name: 'g',
     description: 'd',
     private: false,
     multicastLimit: 0
   })
-  let network2 = network.merge({
+  const network2 = network.merge({
     name: 'k',
     description: null,
     private: true,
@@ -42,9 +42,9 @@ test('merge', t => {
 })
 
 test('it ignores weird keys', t => {
-  let network = Network.fromObj()
+  const network = Network.fromObj()
 
-  let network2 = network.merge({ foojiwooji: 1 })
+  const network2 = network.merge({ foojiwooji: 1 })
 
   t.deepEqual(network2.toJSON(), {})
   t.ok(network2 instanceof Network)
@@ -59,11 +59,11 @@ test('round trip', t => {
   const nw2 = Network.fromObj(nw1)
   const nw3 = Network.fromJSON(nw2.toJSON())
 
-  for (let key of keys) {
+  for (const key of keys) {
     t.deepEqual(nw1[key], nw2[key], `a ${key}`)
   }
 
-  for (let key of keys) {
+  for (const key of keys) {
     t.deepEqual(nw1[key], nw3[key], `b ${key}`)
   }
 

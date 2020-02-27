@@ -63,9 +63,6 @@ class SetNetwork extends Command {
     }
   }
 }
-function strip (obj) {
-  return JSON.parse(JSON.stringify(obj))
-}
 
 function fromFlags (flags) {
   const {

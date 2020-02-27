@@ -6,7 +6,7 @@ class Autocomplete extends Command {
   async run () {
     const env = tabtab.parseEnv(process.env)
     const withoutFlags = env.line.split(' ').filter(s => !s.startsWith('-'))
-    const [_, command, nwid, nodeid] = withoutFlags
+    const [, command, nwid, nodeid] = withoutFlags
 
     if (command === 'member:set' || command === 'member:get') {
       if (typeof nodeid === 'string') {
