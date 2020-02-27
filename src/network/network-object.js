@@ -13,7 +13,7 @@ const keys = [
   'private',
   'routes',
   'rules',
-  'plane',
+  'ip6plane',
   'name',
   'tags',
   'name',
@@ -62,7 +62,7 @@ function nest (o) {
     capabilities,
     rulesSource,
     description,
-    plane,
+    ip6plane,
     rfc4193,
     routes,
     rules,
@@ -89,7 +89,7 @@ function nest (o) {
       name,
       mtu,
       v4AssignMode: { zt: zt4 },
-      v6AssignMode: { zt: zt6, '6plane': plane, rfc4193 }
+      v6AssignMode: { zt: zt6, '6plane': ip6plane, rfc4193 }
     }
   }
 }
@@ -111,7 +111,7 @@ function flatten (o) {
       tags = [],
       mtu,
       v4AssignMode: { zt: zt4 } = {},
-      v6AssignMode: { zt: zt6, rfc4193, '6plane': plane } = {}
+      v6AssignMode: { zt: zt6, rfc4193, '6plane': ip6plane } = {}
     } = {}
   } = o
 
@@ -127,7 +127,7 @@ function flatten (o) {
     rfc4193,
     routes,
     rules,
-    plane,
+    ip6plane,
     name,
     tags,
     mtu,
