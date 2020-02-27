@@ -5,7 +5,7 @@ const isIp = require('is-ip')
 const isCidr = require('is-cidr')
 
 const makeTable = require('../../network-table.js')
-const {flatten, nest} = require('../../network')
+const {Network} = require('../../network/network-object')
 
 class SetNetwork extends Command {
   async run() {
@@ -14,19 +14,15 @@ class SetNetwork extends Command {
       args: {networkId},
     } = this.parse(SetNetwork)
 
-    const newFlat = strip(fromFlags(flags))
+    const newFlat = Network.fromObj(fromFlags(flags))
 
     this.validate(newFlat)
 
-    const oldNetwork = await this.central.getNetwork(networkId)
+    if (flags['dry-run']) {
+      return this.log(JSON.stringify(newFlat, 0, 4))
+    }
 
-    const oldFlat = flatten(oldNetwork)
-    const merged = {...oldFlat, ...newFlat}
-
-    // console.log(JSON.stringify(flags, 0, 4))
-    // console.log(JSON.stringify(unFlat(merged), 0, 4))
-
-    const network = await this.central.setNetwork(networkId, nest(merged))
+    const network = await this.central.setNetwork(networkId, newFlat)
 
     if (flags.json) {
       this.log(JSON.stringify(network, 0, 4))
@@ -108,6 +104,7 @@ SetNetwork.args = [{name: 'networkId', required: true}]
 
 SetNetwork.flags = {
   ...Command.flags,
+  'dry-run': flags.boolean({char: 'n'}),
   name: flags.string({allowNo: false}),
   description: flags.string({allowNo: false}),
 

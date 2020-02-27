@@ -1,18 +1,19 @@
 const cli = require('cli-ux').default
 
 const Command = require('../../api-base.js')
+const {Network} = require('../../network/network-object')
 
 class ListPools extends Command {
   async run() {
     const {flags} = this.parse(ListPools)
     const {args: {networkId}} = this.parse(ListPools)
 
-    const network = await this.central.getNetwork(networkId)
+    const network = Network.fromJSON(await this.central.getNetwork(networkId))
 
     if (flags.json) {
-      this.log(JSON.stringify(network.config.ipAssignmentPools, 0, 4))
+      this.log(JSON.stringify(network.ipAssignmentPools, 0, 4))
     } else {
-      this.log(makeTable(network.config.ipAssignmentPools, flags))
+      this.log(makeTable(network.ipAssignmentPools, flags))
     }
   }
 }
