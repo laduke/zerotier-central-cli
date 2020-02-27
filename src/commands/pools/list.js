@@ -1,5 +1,6 @@
-const Command = require('../base.js')
 const cli = require('cli-ux').default
+
+const Command = require('../../api-base.js')
 
 class ListPools extends Command {
   async run() {
@@ -29,7 +30,6 @@ function makeTable(routes, flags) {
 
 ListPools.description = 'list the ip auto-assign pools on a network'
 ListPools.args = [{name: 'networkId', required: true}]
-ListPools.hidden = true
 
 ListPools.flags = {
   ...Command.flags,

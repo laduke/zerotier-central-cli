@@ -5,6 +5,7 @@ const isIp = require('is-ip')
 const isCidr = require('is-cidr')
 
 const makeTable = require('../../network-table.js')
+const {flatten, nest} = require('../../network')
 
 class SetNetwork extends Command {
   async run() {
@@ -19,13 +20,13 @@ class SetNetwork extends Command {
 
     const oldNetwork = await this.central.getNetwork(networkId)
 
-    const oldFlat = rwNetworkProps(oldNetwork)
+    const oldFlat = flatten(oldNetwork)
     const merged = {...oldFlat, ...newFlat}
 
     // console.log(JSON.stringify(flags, 0, 4))
     // console.log(JSON.stringify(unFlat(merged), 0, 4))
 
-    const network = await this.central.setNetwork(networkId, unFlat(merged))
+    const network = await this.central.setNetwork(networkId, nest(merged))
 
     if (flags.json) {
       this.log(JSON.stringify(network, 0, 4))
@@ -70,38 +71,6 @@ function strip(obj) {
   return JSON.parse(JSON.stringify(obj))
 }
 
-function unFlat(props) {
-  const {
-    ipAssignmentPools,
-    routes,
-    enableBroadcast,
-    multicastLimit,
-    description,
-    sixPlane,
-    rfc4193,
-    private: priv,
-    name,
-    mtu,
-    zt4,
-    zt6,
-  } = props
-
-  return {
-    description,
-    config: {
-      routes,
-      ipAssignmentPools,
-      name,
-      enableBroadcast,
-      private: priv,
-      multicastLimit: Number(multicastLimit),
-      mtu: Number(mtu),
-      v4AssignMode: {zt: zt4},
-      v6AssignMode: {zt: zt6, '6plane': sixPlane, rfc4193},
-    },
-  }
-}
-
 function fromFlags(flags) {
   const {
     routes,
@@ -131,38 +100,6 @@ function fromFlags(flags) {
     zt4,
     zt6,
     ipAssignmentPools,
-  }
-}
-
-function rwNetworkProps(network) {
-  const {
-    description,
-    config: {
-      routes,
-      name,
-      enableBroadcast,
-      private: priv,
-      multicastLimit,
-      mtu,
-      v4AssignMode: {zt: zt4},
-      v6AssignMode: {zt: zt6, '6plane': sixPlane, rfc4193},
-      ipAssignmentPools,
-    },
-  } = network
-
-  return {
-    description,
-    enableBroadcast,
-    mtu,
-    multicastLimit,
-    name,
-    private: priv,
-    rfc4193,
-    sixPlane,
-    zt4,
-    zt6,
-    ipAssignmentPools,
-    routes,
   }
 }
 
