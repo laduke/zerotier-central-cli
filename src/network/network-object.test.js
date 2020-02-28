@@ -36,6 +36,28 @@ module.exports = {
     assert.equal(network2.multicastLimit, 1)
   },
 
+  'merge network instances': () => {
+    const network1 = Network.fromObj({
+      name: 'g',
+      description: 'd',
+      private: false,
+      multicastLimit: 0
+    })
+    const network2 = Network.fromObj({
+      name: 'k',
+      description: null,
+      private: true,
+      multicastLimit: 1
+    })
+
+    const network3 = network1.merge(network2)
+
+    assert.equal(network3.name, 'k')
+    assert.equal(network3.description, 'd')
+    assert.equal(network3.private, true)
+    assert.equal(network3.multicastLimit, 1)
+  },
+
   'it ignores weird keys': () => {
     const network = Network.fromObj()
 

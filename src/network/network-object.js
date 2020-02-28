@@ -51,7 +51,7 @@ class Network {
   }
 
   merge (that) {
-    // only props that are set in `that` will be added
+    // only values that are not undefined in `that` will be added
     // or overwritten from the orig network
     return Network.fromObj({ ...this, ...omitEmpty(that) })
   }
@@ -61,9 +61,7 @@ class Network {
   }
 
   toJSON () {
-    const x = omitEmpty(nest(this))
-
-    return x
+    return omitEmpty(nest(this))
   }
 }
 

@@ -1,6 +1,6 @@
 const { flags } = require('@oclif/command')
 
-const _central = require('./central.js')
+const _central = require('./central/central.js')
 const conf = require('./conf.js')
 
 const Base = require('./base.js')
