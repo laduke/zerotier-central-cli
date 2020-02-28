@@ -1,6 +1,6 @@
 const test = require('tape')
 
-const { Network, keys } = require('./network-object.js')
+const { Network } = require('./network-object.js')
 
 test('empty', t => {
   const n = Network.fromObj()
@@ -59,11 +59,11 @@ test('round trip', t => {
   const nw2 = Network.fromObj(nw1)
   const nw3 = Network.fromJSON(nw2.toJSON())
 
-  for (const key of keys) {
+  for (const key of Network.keys()) {
     t.deepEqual(nw1[key], nw2[key], `a ${key}`)
   }
 
-  for (const key of keys) {
+  for (const key of Network.keys()) {
     t.deepEqual(nw1[key], nw3[key], `b ${key}`)
   }
 

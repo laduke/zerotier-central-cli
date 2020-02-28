@@ -1,11 +1,13 @@
 const Command = require('../../api-base.js')
 const makeTable = require('../../network-table.js')
+const { Network } = require('../../network/network-object.js')
 
 class ListNetworks extends Command {
   async run () {
     const { flags } = this.parse(ListNetworks)
 
-    const networks = await this.central.getNetworks()
+    const response = await this.central.getNetworks()
+    const networks = response.map(Network.fromJSON)
 
     // cache network ids
     this.conf.set('networkIds', networks.map(n => n.id))

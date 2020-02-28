@@ -7,54 +7,40 @@ function makeTable (networks, flags) {
     networks,
     {
       id: { header: 'Network-ID', minWidth: 16 },
-      name: {
-        minWidth: 10,
-        get: row => row.config.name
-      },
+      name: { minWidth: 10 },
       description: { extended: true },
-      private: {
-        get: row => row.config.private
-      },
+      private: {},
       authorizedMemberCount: {
-        header: 'Authorized',
-        get: row => row.authorizedMemberCount
+        header: 'Authorized'
       },
       onlineMemberCount: {
-        header: 'Online',
-        get: row => row.onlineMemberCount
+        header: 'Online'
       },
-      v4AutoAssign: {
-        header: 'ZT4',
-        get: row => row.config.v4AssignMode.zt
+      zt4: { header: 'Auto-4' },
+      zt6: {
+        header: 'Auto-6'
       },
-      v6AutoAssign: {
-        header: 'ZT6',
-        get: row => row.config.v6AssignMode.zt
-      },
-      sixPlane: {
-        header: '6PLANE',
-        get: row => row.config.v6AssignMode['6plane']
+      ip6plane: {
+        header: '6PLANE'
       },
       rfc4193: {
-        header: 'RFC4193',
-        get: row => row.config.v6AssignMode.rfc4193
+        header: 'RFC4193'
       },
-      multicast: {
-        get: row => row.config.multicastLimit
+      multicastLimit: {
+        header: 'Multicast'
       },
-      MTU: {
+      mtu: {
         extended: true,
-        header: 'MTU',
-        get: row => row.config.mtu
+        header: 'MTU'
       },
-      broadcast: {
-        get: row => row.config.enableBroadcast
+      enableBroadcast: {
+        header: 'Broadcast'
       },
       ipAssignmentPools: {
         minWidth: 16,
         header: 'Pools',
         get: row => {
-          return (row.config.ipAssignmentPools || [])
+          return (row.ipAssignmentPools || [])
             .map(p => `${p.ipRangeStart} - ${p.ipRangeEnd}`)
             .join('\n')
         },
@@ -65,7 +51,7 @@ function makeTable (networks, flags) {
         minWidth: 15,
         header: 'Routes',
         get: row => {
-          return (row.config.routes || [])
+          return (row.routes || [])
             .map(p => `${p.target} ${p.via ? '- ' + p.via : ''}`)
             .join('\n')
         }

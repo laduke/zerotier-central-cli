@@ -1,7 +1,8 @@
 // const {inspect} = require('util')
 const omitEmpty = require('omit-empty')
 
-const keys = [
+// writable
+const writable = [
   'ipAssignmentPools',
   'enableBroadcast',
   'multicastLimit',
@@ -22,10 +23,20 @@ const keys = [
   'zt6'
 ]
 
+const readable = [
+  'id',
+  'creationTime',
+  'lastModified',
+  'totalMemberCount',
+  'onlineMemberCount',
+  'authorizedMemberCount',
+  'ownerId'
+]
+
 class Network {
   constructor (n) {
     for (const p in n) {
-      if (keys.includes(p)) {
+      if (writable.concat(readable).includes(p)) {
         this[p] = n[p]
       }
     }
@@ -43,6 +54,10 @@ class Network {
     // only props that are set in `that` will be added
     // or overwritten from the orig network
     return Network.fromObj({ ...this, ...omitEmpty(that) })
+  }
+
+  static keys () {
+    return writable
   }
 
   toJSON () {
@@ -96,9 +111,15 @@ function nest (o) {
 
 function flatten (o) {
   const {
+    id,
     description = '',
     rulesSource = '',
-    permissions,
+    permissions = {},
+
+    ownerId = '',
+    totalMemberCount = 0,
+    onlineMemberCount = 0,
+    authorizedMemberCount = 0,
     config: {
       ipAssignmentPools = [],
       capabilities = [],
@@ -111,7 +132,10 @@ function flatten (o) {
       tags = [],
       mtu,
       v4AssignMode: { zt: zt4 } = {},
-      v6AssignMode: { zt: zt6, rfc4193, '6plane': ip6plane } = {}
+      v6AssignMode: { zt: zt6, rfc4193, '6plane': ip6plane } = {},
+
+      creationTime = 0,
+      lastModified = 0
     } = {}
   } = o
 
@@ -132,8 +156,16 @@ function flatten (o) {
     tags,
     mtu,
     zt4,
-    zt6
+    zt6,
+
+    id,
+    ownerId,
+    creationTime,
+    lastModified,
+    totalMemberCount,
+    onlineMemberCount,
+    authorizedMemberCount
   }
 }
 
-module.exports = { Network, keys }
+module.exports = { Network }

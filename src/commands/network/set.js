@@ -19,10 +19,10 @@ class SetNetwork extends Command {
     this.validate(newFlat)
 
     if (flags['dry-run']) {
-      return this.log(JSON.stringify(newFlat, 0, 4))
+      return this.log(JSON.stringify(newFlat, 0, 2))
     }
 
-    const network = await this.central.setNetwork(networkId, newFlat)
+    const network = Network.fromJSON(await this.central.setNetwork(networkId, newFlat))
 
     if (flags.json) {
       this.log(JSON.stringify(network, 0, 4))

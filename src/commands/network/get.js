@@ -1,5 +1,6 @@
 const Command = require('../../api-base.js')
 const makeTable = require('../../network-table.js')
+const { Network } = require('../../network/network-object.js')
 
 class GetNetwork extends Command {
   async run () {
@@ -14,7 +15,7 @@ class GetNetwork extends Command {
         .then(ns => ns.map(n => n.id))
     }
 
-    const network = await this.central.getNetwork(networkId)
+    const network = Network.fromJSON(await this.central.getNetwork(networkId))
 
     if (flags.json) {
       this.log(JSON.stringify(network, 0, 4))
