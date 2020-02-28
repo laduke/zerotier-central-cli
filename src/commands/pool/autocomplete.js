@@ -7,7 +7,7 @@ class Autocomplete extends Command {
     const withoutFlags = env.line.split(' ').filter(s => !s.startsWith('-'))
     const [, command] = withoutFlags
 
-    if (command === 'pools:list' || command === 'pools:add') {
+    if (command === 'pool:list' || command === 'pool:add') {
       let networkIds = this.conf.get('networkIds') || []
 
       if (networkIds.length === 0) {

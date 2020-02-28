@@ -6,7 +6,12 @@ const { Network } = require('../../network/network-object')
 class ListPools extends Command {
   async run () {
     const { flags } = this.parse(ListPools)
-    const { args: { networkId } } = this.parse(ListPools)
+    const { args: { networkId }, argv } = this.parse(ListPools)
+
+    if (argv.includes('--autocomplete')) {
+      return this.central.getNetworks()
+        .then(ns => ns.map(n => n.id))
+    }
 
     const network = Network.fromJSON(await this.central.getNetwork(networkId))
 
@@ -18,9 +23,9 @@ class ListPools extends Command {
   }
 }
 
-function makeTable (routes, flags) {
+function makeTable (pools, flags) {
   return cli.table(
-    routes,
+    pools,
     {
       ipRangeStart: { header: 'Start' },
       ipRangeEnd: { header: 'End' }
