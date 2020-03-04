@@ -12,9 +12,9 @@ function makeTable (members, flags) {
       authorized: { get: row => row.config.authorized },
       name: {},
       online: {},
-      description: {},
-      bridging: { get: row => row.config.activeBridge },
-      auto: { get: row => row.config.noAutoAssignIps },
+      description: { extended: true },
+      bridging: { get: row => row.config.activeBridge, extended: true },
+      auto: { get: row => row.config.noAutoAssignIps, extended: true },
       ipAssignments: {
         header: 'IP-Assignments',
         get: row => (row.config.ipAssignments || []).join('\n')
@@ -22,24 +22,27 @@ function makeTable (members, flags) {
       lastOnline: { header: 'Last-Online' },
       creationTime: {
         get: row => row.config.creationTime,
-        header: 'Creation-Time'
+        header: 'Creation-Time',
+        extended: true
       },
-      clientVersion: { header: 'Version' },
-      physicalAddress: { header: 'Physical-Address' },
-      hidden: {},
+      clientVersion: { header: 'Version', extended: true },
+      physicalAddress: { header: 'Physical-Address', extended: true },
+      hidden: { extended: true },
       '6plane': {
         header: '6PLANE',
         description: { extended: true },
         get: row => {
           return sixPlane(row.config.nwid, row.config.id)
-        }
+        },
+        extended: true
       },
       rfc4193: {
         header: 'RFC4193',
         description: { extended: true },
         get: row => {
           return rfc4193(row.config.nwid, row.config.id)
-        }
+        },
+        extended: true
       }
     },
     flags
