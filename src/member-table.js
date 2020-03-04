@@ -19,7 +19,7 @@ function makeTable (members, flags) {
         header: 'IP-Assignments',
         get: row => (row.config.ipAssignments || []).join('\n')
       },
-      lastOnline: { header: 'Last-Online' },
+      lastOnline: { header: 'Last-Online', get: row => new Date(row.lastOnline) },
       creationTime: {
         get: row => row.config.creationTime,
         header: 'Creation-Time',
