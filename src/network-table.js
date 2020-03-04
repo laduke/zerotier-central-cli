@@ -16,17 +16,21 @@ function makeTable (networks, flags) {
       onlineMemberCount: {
         header: 'Online'
       },
-      zt4: { header: 'Auto-4' },
+      zt4: { extended: true, header: 'Auto-4' },
       zt6: {
+        extended: true,
         header: 'Auto-6'
       },
       ip6plane: {
+        extended: true,
         header: '6PLANE'
       },
       rfc4193: {
+        extended: true,
         header: 'RFC4193'
       },
       multicastLimit: {
+        extended: true,
         header: 'Multicast'
       },
       mtu: {
@@ -34,6 +38,7 @@ function makeTable (networks, flags) {
         header: 'MTU'
       },
       enableBroadcast: {
+        extended: true,
         header: 'Broadcast'
       },
       ipAssignmentPools: {
