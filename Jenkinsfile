@@ -1,5 +1,9 @@
 pipeline {
-    agent { docker { image 'node:dubnium-alpine' } }
+    agent {
+        dockerfile {
+            args '-v $HOME/.npm:/npm'
+        }
+    }
     environment {
         HOME = '.'
     }
@@ -8,7 +12,7 @@ pipeline {
             steps {
                 sh 'npm --version'
                 sh 'node --version'
-                sh 'npm ci'
+                sh 'npm install'
             }
         }
 
@@ -19,12 +23,27 @@ pipeline {
             }
         }
 
-/* npm build works, but not on this jenkins/docker file yet.
-        stage('buil') {
+        stage('build') {
+            when { branch "master" }
             steps {
                 sh 'npm -s run build'
+                sh 'npm -s run build:win'
+                // sh 'npm -s run build:deb' // tries to chown -R root {workpspace} and it's not allowed
+                // sh 'npm -s run build:macos' // must be run from macos
             }
         }
-*/
+
+        stage('deploy') {
+            when { allOf { branch "master"; tag "release-*"} }
+            steps {
+                echo 'deploy script goes here'
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'dist/**/*.{tar.gz,exe,apt}', onlyIfSuccessful: true, fingerprint: true
+                }
+            }
+        }
+
     }
 }

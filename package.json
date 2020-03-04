@@ -23,6 +23,9 @@
   ],
   "scripts": {
     "build": "oclif-dev pack",
+    "build:macos": "oclif-dev pack:macos",
+    "build:win": "oclif-dev pack:win",
+    "build:deb": "oclif-dev pack:deb",
     "prepack": "oclif-dev manifest && oclif-dev readme",
     "postpack": "rm -f oclif.manifest.json",
     "test": "teenytest ./src/**/*.test.js",
@@ -62,6 +65,7 @@
   },
   "oclif": {
     "commands": "./src/commands",
+    "macos": { "identifier": "com.zerotier.cli.central" },
     "topics": {
       "conf": {
         "description": "manage ztc cli config/preferences"
