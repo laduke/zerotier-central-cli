@@ -1,6 +1,6 @@
 {
   "name": "@laduke/zerotier-central-cli",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Zerotier Central CLI",
   "keywords": [
     "zerotier",
@@ -65,7 +65,9 @@
   },
   "oclif": {
     "commands": "./src/commands",
-    "macos": { "identifier": "com.zerotier.cli.central" },
+    "macos": {
+      "identifier": "com.zerotier.cli.central"
+    },
     "topics": {
       "conf": {
         "description": "manage ztc cli config/preferences"

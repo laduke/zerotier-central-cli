@@ -25,7 +25,7 @@ $ npm install -g @laduke/zerotier-central-cli
 $ ztc COMMAND
 running command...
 $ ztc (-v|--version|version)
-@laduke/zerotier-central-cli/0.0.8 darwin-x64 node-v11.10.1
+@laduke/zerotier-central-cli/0.0.9 darwin-x64 node-v11.10.1
 $ ztc --help [COMMAND]
 USAGE
   $ ztc COMMAND
@@ -48,6 +48,9 @@ USAGE
 * [`ztc network:get NETWORKID`](#ztc-networkget-networkid)
 * [`ztc network:list`](#ztc-networklist)
 * [`ztc network:set NETWORKID`](#ztc-networkset-networkid)
+* [`ztc pool:add NETWORKID START END`](#ztc-pooladd-networkid-start-end)
+* [`ztc pool:list NETWORKID`](#ztc-poollist-networkid)
+* [`ztc route:list NETWORKID`](#ztc-routelist-networkid)
 * [`ztc status`](#ztc-status)
 
 ## `ztc autocomplete:install`
@@ -57,13 +60,9 @@ setup autocomplete
 ```
 USAGE
   $ ztc autocomplete:install
-
-OPTIONS
-  -t, --token=token  my.zerotier.com api access token
-  --apiBase=apiBase  use a different central instance my-dev.zerotier.com/api
 ```
 
-_See code: [src/commands/autocomplete/install.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/autocomplete/install.js)_
+_See code: [src/commands/autocomplete/install.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/autocomplete/install.js)_
 
 ## `ztc autocomplete:uninstall`
 
@@ -72,13 +71,9 @@ setup autocomplete
 ```
 USAGE
   $ ztc autocomplete:uninstall
-
-OPTIONS
-  -t, --token=token  my.zerotier.com api access token
-  --apiBase=apiBase  use a different central instance my-dev.zerotier.com/api
 ```
 
-_See code: [src/commands/autocomplete/uninstall.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/autocomplete/uninstall.js)_
+_See code: [src/commands/autocomplete/uninstall.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/autocomplete/uninstall.js)_
 
 ## `ztc conf:clear`
 
@@ -89,7 +84,7 @@ USAGE
   $ ztc conf:clear
 ```
 
-_See code: [src/commands/conf/clear.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/conf/clear.js)_
+_See code: [src/commands/conf/clear.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/conf/clear.js)_
 
 ## `ztc conf:delete`
 
@@ -100,13 +95,13 @@ USAGE
   $ ztc conf:delete
 
 OPTIONS
-  --apiBase
+  --api-base
   --memberIds
   --networkIds
   --token
 ```
 
-_See code: [src/commands/conf/delete.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/conf/delete.js)_
+_See code: [src/commands/conf/delete.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/conf/delete.js)_
 
 ## `ztc conf:get`
 
@@ -117,11 +112,13 @@ USAGE
   $ ztc conf:get
 
 OPTIONS
-  --apiBase
+  --api-base
+  --memberIds
+  --networkIds
   --token
 ```
 
-_See code: [src/commands/conf/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/conf/get.js)_
+_See code: [src/commands/conf/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/conf/get.js)_
 
 ## `ztc conf:set`
 
@@ -132,11 +129,11 @@ USAGE
   $ ztc conf:set
 
 OPTIONS
-  --apiBase=apiBase  save base url (https://my.zerotier.com/api/)
-  --token=token      save central api token
+  --api-base=api-base  save base url (https://my.zerotier.com/api/)
+  --token=token        save central api token
 ```
 
-_See code: [src/commands/conf/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/conf/set.js)_
+_See code: [src/commands/conf/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/conf/set.js)_
 
 ## `ztc conf:setup`
 
@@ -145,13 +142,9 @@ save your api token interactively.
 ```
 USAGE
   $ ztc conf:setup
-
-OPTIONS
-  -t, --token=token  my.zerotier.com api access token
-  --apiBase=apiBase  use a different central instance my-dev.zerotier.com/api
 ```
 
-_See code: [src/commands/conf/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/conf/setup.js)_
+_See code: [src/commands/conf/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/conf/setup.js)_
 
 ## `ztc help [COMMAND]`
 
@@ -183,7 +176,7 @@ OPTIONS
   -e, --extended         extended output
   -j, --json             output raw json
   -t, --token=token      my.zerotier.com api access token
-  --apiBase=apiBase      use a different central instance my-dev.zerotier.com/api
+  --api-base=api-base    use a different central instance my-dev.zerotier.com/api
   --csv                  output is csv format
   --filter=filter        filter property by partial string matching, ex: name=foo
   --no-header            hide table header from output
@@ -191,7 +184,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/member/get.js)_
+_See code: [src/commands/member/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/member/get.js)_
 
 ## `ztc member:list NETWORKID`
 
@@ -206,7 +199,7 @@ OPTIONS
   -e, --extended         extended output
   -j, --json             output raw json
   -t, --token=token      my.zerotier.com api access token
-  --apiBase=apiBase      use a different central instance my-dev.zerotier.com/api
+  --api-base=api-base    use a different central instance my-dev.zerotier.com/api
   --csv                  output is csv format
   --filter=filter        filter property by partial string matching, ex: name=foo
   --no-header            hide table header from output
@@ -214,7 +207,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/member/list.js)_
+_See code: [src/commands/member/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/member/list.js)_
 
 ## `ztc member:set NETWORKID NODEID`
 
@@ -230,7 +223,7 @@ OPTIONS
   -j, --json                 output raw json
   -t, --token=token          my.zerotier.com api access token
   --[no-]activeBridge
-  --apiBase=apiBase          use a different central instance my-dev.zerotier.com/api
+  --api-base=api-base        use a different central instance my-dev.zerotier.com/api
   --[no-]authorized
   --csv                      output is csv format
   --description=description
@@ -243,7 +236,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/member/set.js)_
+_See code: [src/commands/member/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/member/set.js)_
 
 ## `ztc network:get NETWORKID`
 
@@ -258,7 +251,7 @@ OPTIONS
   -e, --extended         extended output
   -j, --json             output raw json
   -t, --token=token      my.zerotier.com api access token
-  --apiBase=apiBase      use a different central instance my-dev.zerotier.com/api
+  --api-base=api-base    use a different central instance my-dev.zerotier.com/api
   --csv                  output is csv format
   --filter=filter        filter property by partial string matching, ex: name=foo
   --no-header            hide table header from output
@@ -266,7 +259,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/network/get.js)_
+_See code: [src/commands/network/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/network/get.js)_
 
 ## `ztc network:list`
 
@@ -281,7 +274,7 @@ OPTIONS
   -e, --extended         extended output
   -j, --json             output raw json
   -t, --token=token      my.zerotier.com api access token
-  --apiBase=apiBase      use a different central instance my-dev.zerotier.com/api
+  --api-base=api-base    use a different central instance my-dev.zerotier.com/api
   --csv                  output is csv format
   --filter=filter        filter property by partial string matching, ex: name=foo
   --no-header            hide table header from output
@@ -289,7 +282,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/network/list.js)_
+_See code: [src/commands/network/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/network/list.js)_
 
 ## `ztc network:set NETWORKID`
 
@@ -303,9 +296,10 @@ OPTIONS
   -c, --columns=columns
   -e, --extended                         extended output
   -j, --json                             output raw json
+  -n, --dry-run
   -t, --token=token                      my.zerotier.com api access token
   --[no-]6plane
-  --apiBase=apiBase                      use a different central instance my-dev.zerotier.com/api
+  --api-base=api-base                    use a different central instance my-dev.zerotier.com/api
   --csv                                  output is csv format
   --description=description
   --[no-]enableBroadcast
@@ -324,7 +318,81 @@ OPTIONS
   --[no-]v6AutoAssign
 ```
 
-_See code: [src/commands/network/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/network/set.js)_
+_See code: [src/commands/network/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/network/set.js)_
+
+## `ztc pool:add NETWORKID START END`
+
+list the ip auto-assign pools on a network
+
+```
+USAGE
+  $ ztc pool:add NETWORKID START END
+
+ARGUMENTS
+  NETWORKID
+  START      IP address
+  END        IP address
+
+OPTIONS
+  -c, --columns=columns
+  -e, --extended         extended output
+  -j, --json             output raw json
+  -t, --token=token      my.zerotier.com api access token
+  --api-base=api-base    use a different central instance my-dev.zerotier.com/api
+  --csv                  output is csv format
+  --filter=filter        filter property by partial string matching, ex: name=foo
+  --no-header            hide table header from output
+  --no-truncate          do not truncate output to fit screen
+  --sort=sort
+```
+
+_See code: [src/commands/pool/add.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/pool/add.js)_
+
+## `ztc pool:list NETWORKID`
+
+list the ip auto-assign pools on a network
+
+```
+USAGE
+  $ ztc pool:list NETWORKID
+
+OPTIONS
+  -c, --columns=columns
+  -e, --extended         extended output
+  -j, --json             output raw json
+  -t, --token=token      my.zerotier.com api access token
+  --api-base=api-base    use a different central instance my-dev.zerotier.com/api
+  --csv                  output is csv format
+  --filter=filter        filter property by partial string matching, ex: name=foo
+  --no-header            hide table header from output
+  --no-truncate          do not truncate output to fit screen
+  --sort=sort
+```
+
+_See code: [src/commands/pool/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/pool/list.js)_
+
+## `ztc route:list NETWORKID`
+
+list the ip auto-assign pools on a network
+
+```
+USAGE
+  $ ztc route:list NETWORKID
+
+OPTIONS
+  -c, --columns=columns
+  -e, --extended         extended output
+  -j, --json             output raw json
+  -t, --token=token      my.zerotier.com api access token
+  --api-base=api-base    use a different central instance my-dev.zerotier.com/api
+  --csv                  output is csv format
+  --filter=filter        filter property by partial string matching, ex: name=foo
+  --no-header            hide table header from output
+  --no-truncate          do not truncate output to fit screen
+  --sort=sort
+```
+
+_See code: [src/commands/route/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/route/list.js)_
 
 ## `ztc status`
 
@@ -339,7 +407,7 @@ OPTIONS
   -e, --extended         extended output
   -j, --json             output raw json
   -t, --token=token      my.zerotier.com api access token
-  --apiBase=apiBase      use a different central instance my-dev.zerotier.com/api
+  --api-base=api-base    use a different central instance my-dev.zerotier.com/api
   --csv                  output is csv format
   --filter=filter        filter property by partial string matching, ex: name=foo
   --no-header            hide table header from output
@@ -350,5 +418,5 @@ DESCRIPTION
   not much here
 ```
 
-_See code: [src/commands/status.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.8/src/commands/status.js)_
+_See code: [src/commands/status.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.9/src/commands/status.js)_
 <!-- commandsstop -->
