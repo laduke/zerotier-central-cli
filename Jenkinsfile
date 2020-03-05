@@ -34,7 +34,7 @@ pipeline {
         }
 
         stage('deploy') {
-            when { allOf { branch "master"; tag "release-*"} }
+            when { allOf { branch "master"; tag "v*.*.*"} }
             steps {
                 echo 'deploy script goes here'
             }

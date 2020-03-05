@@ -77,6 +77,12 @@
       },
       "member": {
         "description": "manage zerotier network members"
+      },
+      "pool": {
+        "description": "manage zerotier auto-assign pools on a network"
+      },
+      "route": {
+        "description": "manage zerotier managed routes on a network"
       }
     },
     "bin": "ztc",
