@@ -322,7 +322,7 @@ _See code: [src/commands/network/set.js](https://github.com/laduke/zerotier-cent
 
 ## `ztc pool:add NETWORKID START END`
 
-list the ip auto-assign pools on a network
+add an ip auto-assign pool to a network
 
 ```
 USAGE
@@ -373,7 +373,7 @@ _See code: [src/commands/pool/list.js](https://github.com/laduke/zerotier-centra
 
 ## `ztc route:list NETWORKID`
 
-list the ip auto-assign pools on a network
+list the managed routes on a network
 
 ```
 USAGE
