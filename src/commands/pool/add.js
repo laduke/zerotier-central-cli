@@ -30,7 +30,7 @@ function makeTable (routes, flags) {
   )
 }
 
-AddPool.description = 'list the ip auto-assign pools on a network'
+AddPool.description = 'add an ip auto-assign pool to a network'
 AddPool.args = [
   { name: 'networkId', required: true },
   { name: 'start', required: true, description: 'IP address' },

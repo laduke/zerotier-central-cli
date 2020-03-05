@@ -34,7 +34,7 @@ function makeTable (routes, flags) {
   )
 }
 
-ListRoutes.description = 'list the ip auto-assign pools on a network'
+ListRoutes.description = 'list the managed routes on a network'
 ListRoutes.args = [{ name: 'networkId', required: true }]
 
 ListRoutes.flags = {
