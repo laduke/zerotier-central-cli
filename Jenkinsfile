@@ -27,7 +27,7 @@ pipeline {
             when { branch "master" }
             steps {
                 sh 'npm -s run build'
-                sh 'npm -s run build:win'
+                // sh 'npm -s run build:win' // Error: dest already exists. need to clear stuff out of /tmp
                 // sh 'npm -s run build:deb' // tries to chown -R root {workpspace} and it's not allowed
                 // sh 'npm -s run build:macos' // must be run from macos
             }
