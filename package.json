@@ -43,8 +43,8 @@
     "@oclif/config": "^1.14.0",
     "@oclif/plugin-autocomplete": "^0.1.5",
     "@oclif/plugin-help": "^2.2.3",
-    "cli-ux": "^5.4.4",
-    "conf": "^6.2.0",
+    "cli-ux": "^5.4.5",
+    "conf": "^6.2.1",
     "is-cidr": "^3.1.0",
     "is-ip": "^3.1.0",
     "omit-empty": "^1.0.0",
@@ -56,9 +56,9 @@
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-node": "^11.0.0",
     "globby": "^10.0.2",
-    "standard": "*",
+    "standard": "^14.3.3",
     "teenytest": "^5.3.0",
-    "testdouble": "^3.13.0"
+    "testdouble": "^3.13.1"
   },
   "engines": {
     "node": ">=8.3.0"
