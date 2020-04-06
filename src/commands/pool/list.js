@@ -1,3 +1,4 @@
+const axios = require('axios').default
 const cli = require('cli-ux').default
 
 const Command = require('../../api-base.js')
@@ -13,7 +14,9 @@ class ListPools extends Command {
         .then(ns => ns.map(n => n.id))
     }
 
-    const network = Network.fromJSON(await this.central.getNetwork(networkId))
+    const req = this.central.networkGet(networkId)
+    const { data } = await axios(req)
+    const network = Network.fromJSON(data)
 
     if (flags.json) {
       this.log(JSON.stringify(network.ipAssignmentPools, 0, 4))

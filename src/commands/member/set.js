@@ -1,3 +1,5 @@
+const axios = require('axios').default
+
 const { flags } = require('@oclif/command')
 const Command = require('../../api-base.js')
 const makeTable = require('../../member-table.js')
@@ -22,7 +24,8 @@ class SetMember extends Command {
     // strip keys with undefined values
     const data2 = JSON.parse(JSON.stringify(data))
 
-    const member = await this.central.setMember(networkId, nodeId, data2)
+    const req = this.central.memberUpdate(networkId, nodeId)
+    const { data: member } = await axios({ ...req, data: data2 })
 
     if (flags.json) {
       this.log(JSON.stringify(member, 0, 4))

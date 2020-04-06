@@ -1,5 +1,6 @@
 const Command = require('../api-base.js')
 const cli = require('cli-ux').default
+const axios = require('axios').default
 
 class StatusCommand extends Command {
   async run () {
@@ -9,7 +10,8 @@ class StatusCommand extends Command {
       `hello ${name} from /Users/travis/src/zerotier-central-cli/src/commands/status.js`
     )
 
-    const status = await this.central.getStatus()
+    const req = this.central.statusGet()
+    const { data: status } = await axios(req)
 
     if (flags.json) {
       this.log(JSON.stringify(status, 0, 4))

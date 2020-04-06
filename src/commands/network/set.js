@@ -1,5 +1,7 @@
 const assert = require('assert')
+const axios = require('axios').default
 const { flags } = require('@oclif/command')
+
 const Command = require('../../api-base.js')
 const isIp = require('is-ip')
 const isCidr = require('is-cidr')
@@ -22,7 +24,9 @@ class SetNetwork extends Command {
       return this.log(JSON.stringify(newFlat, 0, 2))
     }
 
-    const network = Network.fromJSON(await this.central.setNetwork(networkId, newFlat))
+    const req = this.central.networkUpdate(networkId)
+    const { data } = await axios({ ...req, data: newFlat })
+    const network = Network.fromJSON(data)
 
     if (flags.json) {
       this.log(JSON.stringify(network, 0, 4))

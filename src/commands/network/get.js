@@ -1,3 +1,5 @@
+const axios = require('axios').default
+
 const Command = require('../../api-base.js')
 const makeTable = require('../../network-table.js')
 const { Network } = require('../../network/network-object.js')
@@ -15,7 +17,9 @@ class GetNetwork extends Command {
         .then(ns => ns.map(n => n.id))
     }
 
-    const network = Network.fromJSON(await this.central.getNetwork(networkId))
+    const req = this.central.networkGet(networkId)
+    const { data } = await axios(req)
+    const network = Network.fromJSON(data)
 
     if (flags.json) {
       this.log(JSON.stringify(network, 0, 4))

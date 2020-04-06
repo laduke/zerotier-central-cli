@@ -1,3 +1,5 @@
+const axios = require('axios').default
+
 const Command = require('../../api-base.js')
 const makeTable = require('../../member-table.js')
 
@@ -8,7 +10,8 @@ class GetMember extends Command {
       args: { networkId, nodeId }
     } = this.parse(GetMember)
 
-    const member = await this.central.getMember(networkId, nodeId)
+    const req = this.central.memberGet(networkId, nodeId)
+    const { data: member } = await axios(req)
 
     if (flags.json) {
       this.log(JSON.stringify(member, 0, 4))

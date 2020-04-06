@@ -1,4 +1,6 @@
+const axios = require('axios').default
 const tabtab = require('tabtab')
+
 const Command = require('../../api-base.js')
 
 class Autocomplete extends Command {
@@ -11,9 +13,10 @@ class Autocomplete extends Command {
       let networkIds = this.conf.get('networkIds') || []
 
       if (networkIds.length === 0) {
-        networkIds = await this.central
-          .getNetworks()
-          .then(ns => ns.map(n => n.id))
+        const req = this.central.networkList()
+        const { data: networks } = await axios(req)
+
+        networkIds = networks.map(n => n.id)
 
         this.conf.set('networkIds', networkIds || [])
       }

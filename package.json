@@ -38,11 +38,12 @@
     ]
   },
   "dependencies": {
-    "@laduke/zerotier-central-client": "0.0.3",
+    "@laduke/zerotier-central-client": "0.0.4",
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.14.0",
     "@oclif/plugin-autocomplete": "^0.1.5",
     "@oclif/plugin-help": "^2.2.3",
+    "axios": "^0.19.2",
     "cli-ux": "^5.4.5",
     "conf": "^6.2.1",
     "is-cidr": "^3.1.0",

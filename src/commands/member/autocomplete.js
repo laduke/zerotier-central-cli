@@ -1,3 +1,4 @@
+const axios = require('axios').default
 const tabtab = require('tabtab')
 
 const Command = require('../../api-base.js')
@@ -11,16 +12,17 @@ class Autocomplete extends Command {
     if (command === 'member:set' || command === 'member:get') {
       if (typeof nodeid === 'string') {
         const tmp = this.conf.get('memberIds') || {}
-        let members = tmp[nwid] || []
+        const members = tmp[nwid] || []
 
         if (members.length === 0) {
-          members = await this.central
-            .getMembers(nwid)
-            .then(ms => ms.map(m => m.nodeId).slice(0, 23))
+          const req = this.central.memberList(nwid)
+          const { data: members } = await axios(req)
+
+          const memberIds = members.map(m => m.nodeId).slice(0, 23)
 
           this.conf.set('memberIds', {
             ...this.conf.get('memberIds'),
-            [nwid]: members
+            [nwid]: memberIds
           })
         }
 
@@ -41,9 +43,9 @@ class Autocomplete extends Command {
     let networkIds = this.conf.get('networkIds') || []
 
     if (networkIds.length === 0) {
-      networkIds = await this.central
-        .getNetworks()
-        .then(ns => ns.map(n => n.id))
+      const req = this.central.networkList()
+      const { data: networks } = await axios(req)
+      networkIds = networks.map(n => n.id)
       this.conf.set('networkIds', networkIds || [])
     }
 

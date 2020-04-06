@@ -1,3 +1,4 @@
+const axios = require('axios').default
 const cli = require('cli-ux').default
 
 const Command = require('../../api-base.js')
@@ -6,15 +7,29 @@ class AddPool extends Command {
   async run () {
     const { flags } = this.parse(AddPool)
     const {
-      args: { networkId }
+      args: { networkId, start, end }
     } = this.parse(AddPool)
 
-    const network = await this.central.setNetwork(networkId, {})
+    // TODO
+    const req = this.central.networkGet(networkId)
+    const { data } = await axios(req)
+    const pools = data.config.ipAssignmentPools.concat({
+      ipRangeStart: start,
+      ipRangeEnd: end
+    })
+
+    console.log(pools)
+    const opts = {
+      ...this.central.networkUpdate(networkId),
+      data: { config: { ipAssignmentPools: pools } }
+    }
+
+    const { data: newNetwork } = await axios(opts)
 
     if (flags.json) {
-      this.log(JSON.stringify(network.config.ipAssignmentPools, 0, 4))
+      this.log(JSON.stringify(newNetwork.config.ipAssignmentPools, 0, 4))
     } else {
-      this.log(makeTable(network.config.ipAssignmentPools, flags))
+      this.log(makeTable(newNetwork.config.ipAssignmentPools, flags))
     }
   }
 }
