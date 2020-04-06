@@ -1,6 +1,6 @@
 {
   "name": "@laduke/zerotier-central-cli",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Zerotier Central CLI",
   "keywords": [
     "zerotier",
