@@ -5,6 +5,7 @@ const omitEmpty = require('omit-empty')
 const writable = [
   'authorized',
   'name',
+  'hidden',
   'description',
   'ipAssignments',
   'activeBridge',
@@ -13,7 +14,7 @@ const writable = [
   'noAutoAssignIps'
 ]
 
-const readable = ['nodeId']
+const readable = ['nodeId', 'networkId']
 
 class Member {
   constructor (m) {
@@ -26,6 +27,11 @@ class Member {
 
   static fromObj (m = {}) {
     return new Member(m)
+  }
+
+  no () {
+    const { nodeId, networkId, ...rest } = this.toJSON()
+    return rest
   }
 
   static fromJSON (m = {}) {
@@ -50,8 +56,10 @@ class Member {
 function flatten (o) {
   const {
     nodeId,
+    networkId,
     description,
     name,
+    hidden,
     config: {
       authorized,
       ipAssignments,
@@ -64,7 +72,9 @@ function flatten (o) {
 
   return {
     nodeId,
+    networkId,
     name,
+    hidden,
     description,
     authorized,
     ipAssignments,
@@ -78,7 +88,9 @@ function flatten (o) {
 function nest (o) {
   const {
     nodeId,
+    networkId,
     name,
+    hidden,
     description,
     authorized,
     ipAssignments,
@@ -91,8 +103,11 @@ function nest (o) {
   return {
     description,
     nodeId,
+    networkId,
+    // if hidden not defined, re-creating a member doesn't work, for some reason
+    ...(hidden != null ? { ...hidden } : { hidden: false }),
+    name,
     config: {
-      name,
       authorized,
       ipAssignments,
       activeBridge,

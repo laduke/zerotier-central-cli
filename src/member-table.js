@@ -32,7 +32,7 @@ function makeTable (members, flags) {
         header: '6PLANE',
         description: { extended: true },
         get: row => {
-          return sixPlane(row.config.nwid, row.config.id)
+          return sixPlane(row.networkId, row.nodeId)
         },
         extended: true
       },

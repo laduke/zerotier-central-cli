@@ -76,6 +76,7 @@ function nest (o) {
     rulesSource,
     description,
     ip6plane,
+    ownerId,
     rfc4193,
     routes,
     rules,
@@ -90,6 +91,7 @@ function nest (o) {
     description,
     rulesSource,
     permissions,
+    ownerId,
     config: {
       ipAssignmentPools,
       enableBroadcast,

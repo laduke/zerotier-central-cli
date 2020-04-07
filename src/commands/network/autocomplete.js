@@ -8,7 +8,14 @@ class Autocomplete extends Command {
     const withoutFlags = env.line.split(' ').filter(s => !s.startsWith('-'))
     const [, command] = withoutFlags
 
-    if (command === 'network:set' || command === 'network:get') {
+    if (
+      [
+        'network:set',
+        'network:get',
+        'network:save',
+        'network:restore'
+      ].includes(command)
+    ) {
       let networkIds = this.conf.get('networkIds') || []
 
       if (networkIds.length === 0) {

@@ -15,6 +15,7 @@ class SaveNetwork extends Command {
     } = this.parse(SaveNetwork)
 
     if (argv.includes('--autocomplete')) {
+      console.error('here\n\n')
       return this.central.getNetworks()
         .then(ns => ns.map(n => n.id))
     }
