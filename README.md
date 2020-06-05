@@ -16,7 +16,7 @@ Still experimenting with the commands/outputs.
 
 `ztc member:get 6ab565387a82c205 2244668800 --columns=6plane --no-header`
 
-# save and restore networks and their members
+# save and restore network config and their network member config
 - `ztc network:save 8056c2e21cdfd0a6 -j > 8056c2e21cdfd0a6.json`
 - `ztc network:create` -> empty network with random ID (1d71939404d798d7)
 - `ztc network:restore 1d71939404d798d7 < 8056c2e21cdfd0a6.json`
