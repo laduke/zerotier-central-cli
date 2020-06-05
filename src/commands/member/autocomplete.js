@@ -9,7 +9,7 @@ class Autocomplete extends Command {
     const withoutFlags = env.line.split(' ').filter(s => !s.startsWith('-'))
     const [, command, nwid, nodeid] = withoutFlags
 
-    if (command === 'member:set' || command === 'member:get') {
+    if (command === 'member:set' || command === 'member:get' || command === 'member:delete') {
       if (typeof nodeid === 'string') {
         const tmp = this.conf.get('memberIds') || {}
         const members = tmp[nwid] || []
