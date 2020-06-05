@@ -29,7 +29,9 @@ ListMembers.description = 'make a hosts file for a network'
 ListMembers.args = [{ name: 'networkId', required: true }]
 
 ListMembers.flags = {
-  ...Command.flags,
+  sort: flags.string({
+    description: 'property to sort by (prepend ' - ' for descending)'
+  }),
   tld: flags.string({
     description: "last part of the name. for example '.lan'"
   })
