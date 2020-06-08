@@ -3,7 +3,7 @@ const cli = require('cli-ux').default
 const { flags } = require('@oclif/command')
 
 const Command = require('../../api-base.js')
-const makeTable = require('../../member-table.js')
+const isValidHostname = require('is-valid-hostname')
 
 class ListMembers extends Command {
   async run () {
@@ -32,6 +32,9 @@ ListMembers.flags = {
   sort: flags.string({
     description: 'property to sort by (prepend ' - ' for descending)'
   }),
+  filter: flags.string({
+    description: 'filter property by partial string matching, ex: name=foo'
+  }),
   tld: flags.string({
     description: "last part of the name. for example '.lan'"
   })
@@ -39,15 +42,17 @@ ListMembers.flags = {
 
 module.exports = ListMembers
 
-var dashify = require('dashify')
 function makeHosts (members, flags) {
   flags['no-header'] = true
   const tld = flags.tld ? `.${flags.tld}` : ''
+
+  const nameValid = row => isValidHostname(row.name + tld) ? row.name + tld : ''
+
   return cli.table(
     members,
     {
       ipAssignments: {
-        header: 'IP-AssignMents',
+        header: 'IP-Assignments',
         get: row => `${row.config.ipAssignments[0]}`
       },
       nodeId: {
@@ -56,7 +61,22 @@ function makeHosts (members, flags) {
       },
       name: {
         header: 'Name',
-        get: row => `${dashify(row.name)}${tld}`
+        get: nameValid
+      },
+      // for filtering
+      authorized: {
+        header: 'Authorized',
+        extended: true,
+        get: row => row.config.authorized
+      },
+      online: {
+        header: 'online',
+        extended: true
+      },
+      creationTime: {
+        get: row => row.config.creationTime,
+        header: 'Creation-Time',
+        extended: true
       }
     },
     flags
