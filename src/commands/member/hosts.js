@@ -42,8 +42,8 @@ class ListMembers extends Command {
       const ipv6 = row => {
         return row.config.ipAssignments.filter(isIp.v6)[0]
       }
-      const plane = row => sixPlane(row.networkId, row.id)
-      const prefix = row => rfc4193(row.networkId, row.id)
+      const plane = row => sixPlane(row.networkId, row.nodeId)
+      const prefix = row => rfc4193(row.networkId, row.nodeId)
 
       const { v6AssignMode } = network.config
       if (flags.ip6managed == null) {
