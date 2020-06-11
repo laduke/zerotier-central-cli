@@ -79,8 +79,8 @@ function fromFlags (flags) {
     mtu,
     v4AutoAssign: zt4,
     v6AutoAssign: zt6,
-    '6plane': sixPlane,
-    rfc4193,
+    ip6plane,
+    ip6prefix,
     ipAssignmentPools
   } = flags
 
@@ -89,8 +89,8 @@ function fromFlags (flags) {
     enableBroadcast,
     multicastLimit,
     description,
-    sixPlane,
-    rfc4193,
+    ip6plane,
+    rfc4193: ip6prefix,
     private: priv,
     name,
     mtu,
@@ -117,8 +117,8 @@ SetNetwork.flags = {
 
   v4AutoAssign: flags.boolean({ allowNo: true }),
   v6AutoAssign: flags.boolean({ allowNo: true }),
-  '6plane': flags.boolean({ allowNo: true }),
-  rfc4193: flags.boolean({ allowNo: true }),
+  ip6plane: flags.boolean({ allowNo: true }),
+  ip6prefix: flags.boolean({ allowNo: true }),
 
   ipAssignmentPools: flags.string({
     description: '<rangeStart>-<rangeEnd> overwrites existing',
