@@ -30,7 +30,7 @@ $ npm install -g @laduke/zerotier-central-cli
 $ ztc COMMAND
 running command...
 $ ztc (-v|--version|version)
-@laduke/zerotier-central-cli/0.0.20 darwin-x64 node-v12.19.0
+@laduke/zerotier-central-cli/0.0.21 darwin-x64 node-v12.19.0
 $ ztc --help [COMMAND]
 USAGE
   $ ztc COMMAND
@@ -73,7 +73,7 @@ USAGE
   $ ztc autocomplete:install
 ```
 
-_See code: [src/commands/autocomplete/install.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/autocomplete/install.js)_
+_See code: [src/commands/autocomplete/install.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/autocomplete/install.js)_
 
 ## `ztc autocomplete:uninstall`
 
@@ -84,7 +84,7 @@ USAGE
   $ ztc autocomplete:uninstall
 ```
 
-_See code: [src/commands/autocomplete/uninstall.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/autocomplete/uninstall.js)_
+_See code: [src/commands/autocomplete/uninstall.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/autocomplete/uninstall.js)_
 
 ## `ztc conf:clear`
 
@@ -95,7 +95,7 @@ USAGE
   $ ztc conf:clear
 ```
 
-_See code: [src/commands/conf/clear.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/conf/clear.js)_
+_See code: [src/commands/conf/clear.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/conf/clear.js)_
 
 ## `ztc conf:delete`
 
@@ -112,7 +112,7 @@ OPTIONS
   --token
 ```
 
-_See code: [src/commands/conf/delete.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/conf/delete.js)_
+_See code: [src/commands/conf/delete.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/conf/delete.js)_
 
 ## `ztc conf:get`
 
@@ -129,7 +129,7 @@ OPTIONS
   --token
 ```
 
-_See code: [src/commands/conf/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/conf/get.js)_
+_See code: [src/commands/conf/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/conf/get.js)_
 
 ## `ztc conf:set`
 
@@ -144,7 +144,7 @@ OPTIONS
   --token=token        save central api token
 ```
 
-_See code: [src/commands/conf/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/conf/set.js)_
+_See code: [src/commands/conf/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/conf/set.js)_
 
 ## `ztc conf:setup`
 
@@ -155,7 +155,7 @@ USAGE
   $ ztc conf:setup
 ```
 
-_See code: [src/commands/conf/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/conf/setup.js)_
+_See code: [src/commands/conf/setup.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/conf/setup.js)_
 
 ## `ztc help [COMMAND]`
 
@@ -201,7 +201,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/delete.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/member/delete.js)_
+_See code: [src/commands/member/delete.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/member/delete.js)_
 
 ## `ztc member:get NETWORKID NODEID`
 
@@ -224,7 +224,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/member/get.js)_
+_See code: [src/commands/member/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/member/get.js)_
 
 ## `ztc member:hosts NETWORKID`
 
@@ -244,7 +244,7 @@ OPTIONS
   --tld=tld          last part of the name. for example '.lan'
 ```
 
-_See code: [src/commands/member/hosts.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/member/hosts.js)_
+_See code: [src/commands/member/hosts.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/member/hosts.js)_
 
 ## `ztc member:list NETWORKID`
 
@@ -267,7 +267,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/member/list.js)_
+_See code: [src/commands/member/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/member/list.js)_
 
 ## `ztc member:set NETWORKID NODEID`
 
@@ -296,7 +296,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/member/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/member/set.js)_
+_See code: [src/commands/member/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/member/set.js)_
 
 ## `ztc network:create`
 
@@ -332,7 +332,7 @@ OPTIONS
   --[no-]v6AutoAssign
 ```
 
-_See code: [src/commands/network/create.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/network/create.js)_
+_See code: [src/commands/network/create.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/network/create.js)_
 
 ## `ztc network:delete NETWORKID`
 
@@ -356,7 +356,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/delete.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/network/delete.js)_
+_See code: [src/commands/network/delete.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/network/delete.js)_
 
 ## `ztc network:get NETWORKID`
 
@@ -379,7 +379,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/network/get.js)_
+_See code: [src/commands/network/get.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/network/get.js)_
 
 ## `ztc network:list`
 
@@ -402,7 +402,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/network/list.js)_
+_See code: [src/commands/network/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/network/list.js)_
 
 ## `ztc network:restore NETWORKID`
 
@@ -425,7 +425,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/restore.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/network/restore.js)_
+_See code: [src/commands/network/restore.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/network/restore.js)_
 
 ## `ztc network:save NETWORKID`
 
@@ -448,7 +448,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/network/save.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/network/save.js)_
+_See code: [src/commands/network/save.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/network/save.js)_
 
 ## `ztc network:set NETWORKID`
 
@@ -484,7 +484,7 @@ OPTIONS
   --[no-]v6AutoAssign
 ```
 
-_See code: [src/commands/network/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/network/set.js)_
+_See code: [src/commands/network/set.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/network/set.js)_
 
 ## `ztc pool:add NETWORKID START END`
 
@@ -512,7 +512,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/pool/add.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/pool/add.js)_
+_See code: [src/commands/pool/add.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/pool/add.js)_
 
 ## `ztc pool:list NETWORKID`
 
@@ -535,7 +535,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/pool/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/pool/list.js)_
+_See code: [src/commands/pool/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/pool/list.js)_
 
 ## `ztc route:list NETWORKID`
 
@@ -558,7 +558,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/route/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/route/list.js)_
+_See code: [src/commands/route/list.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/route/list.js)_
 
 ## `ztc status`
 
@@ -584,5 +584,5 @@ DESCRIPTION
   not much here
 ```
 
-_See code: [src/commands/status.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.20/src/commands/status.js)_
+_See code: [src/commands/status.js](https://github.com/laduke/zerotier-central-cli/blob/v0.0.21/src/commands/status.js)_
 <!-- commandsstop -->
