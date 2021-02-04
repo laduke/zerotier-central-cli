@@ -43,7 +43,10 @@ function makeTable (members, flags) {
           return rfc4193(row.config.nwid, row.config.id)
         },
         extended: true
-      }
+      },
+      networkId: { header: 'Network-ID' },
+      lastAuthorized: { header: 'Last-Authorized', get: row => new Date(row.config.lastAuthorizedTime) },
+      lastDeauthorized: { header: 'Last-Deauthorized', get: row => new Date(row.config.lastDeauthorizedTime) }
     },
     flags
   )
