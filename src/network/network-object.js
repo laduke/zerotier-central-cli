@@ -84,7 +84,8 @@ function nest (o) {
     name,
     mtu,
     zt4,
-    zt6
+    zt6,
+    id
   } = o
 
   return {
@@ -92,6 +93,7 @@ function nest (o) {
     rulesSource,
     permissions,
     ownerId,
+    id,
     config: {
       ipAssignmentPools,
       enableBroadcast,
