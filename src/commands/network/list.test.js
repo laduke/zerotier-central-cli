@@ -1,9 +1,9 @@
 const assert = require('assert')
-const td = require('testdouble')
+// const td = require('testdouble')
 
 // const ListNetworks = require('../commands/network/list.js')
 
-let central
+// let central
 
 module.exports = {
   beforeEach: () => {

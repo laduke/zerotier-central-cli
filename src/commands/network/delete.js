@@ -1,4 +1,4 @@
-const axios = require('axios').default
+// const axios = require('axios').default
 const { flags } = require('@oclif/command')
 
 const Command = require('../../api-base.js')
@@ -19,7 +19,7 @@ class SetNetwork extends Command {
       return
     }
 
-    const data = await axios(req)
+    // const data = await axios(req)
 
     this.log(`deleted ${networkId}`)
     if (flags.json) {

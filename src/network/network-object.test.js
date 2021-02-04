@@ -13,7 +13,7 @@ module.exports = {
     const network = Network.fromObj({ description })
 
     assert.ok(!network.toJSON().config)
-    assert.equal(description, network.description)
+    assert.strictEqual(description, network.description)
   },
 
   merge: () => {
@@ -30,10 +30,10 @@ module.exports = {
       multicastLimit: 1
     })
 
-    assert.equal(network2.name, 'k')
-    assert.equal(network2.description, 'd')
-    assert.equal(network2.private, true)
-    assert.equal(network2.multicastLimit, 1)
+    assert.strictEqual(network2.name, 'k')
+    assert.strictEqual(network2.description, 'd')
+    assert.strictEqual(network2.private, true)
+    assert.strictEqual(network2.multicastLimit, 1)
   },
 
   'merge network instances': () => {
@@ -52,10 +52,10 @@ module.exports = {
 
     const network3 = network1.merge(network2)
 
-    assert.equal(network3.name, 'k')
-    assert.equal(network3.description, 'd')
-    assert.equal(network3.private, true)
-    assert.equal(network3.multicastLimit, 1)
+    assert.strictEqual(network3.name, 'k')
+    assert.strictEqual(network3.description, 'd')
+    assert.strictEqual(network3.private, true)
+    assert.strictEqual(network3.multicastLimit, 1)
   },
 
   'it ignores weird keys': () => {

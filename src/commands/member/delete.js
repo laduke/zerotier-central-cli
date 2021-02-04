@@ -2,7 +2,6 @@ const axios = require('axios').default
 
 const { flags } = require('@oclif/command')
 const Command = require('../../api-base.js')
-const makeTable = require('../../member-table.js')
 
 class DeleteMember extends Command {
   async run () {
