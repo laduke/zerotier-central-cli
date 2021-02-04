@@ -43,7 +43,7 @@
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-autocomplete": "^0.1.5",
     "@oclif/plugin-help": "^2.2.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cli-ux": "^5.5.0",
     "conf": "^6.2.4",
     "is-cidr": "^3.1.1",
